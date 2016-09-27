@@ -1,0 +1,19 @@
+<template>
+  <nav>
+    <ul class="pagination">
+      <li>
+        <a href="#/${previous.route}">
+          <i class="fa fa-chevron-left"></i> ${previous.title}
+        </a>
+      </li>
+      <li repeat.for="page of pages">
+        <a href="#/${page.route}">${page.title}</a>
+      </li>
+      <li>
+        <a href="#/${next.route}">
+          ${next.title} <i class="fa fa-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</template>

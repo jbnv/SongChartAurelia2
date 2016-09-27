@@ -1,5 +1,5 @@
 {
-  "name": "Aurelia2",
+  "name": "SongCharts",
   "type": "project:application",
   "platform": {
     "id": "web",
@@ -88,6 +88,7 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
+          "node_modules/jquery/dist/jquery.js",
           "scripts/require.js"
         ],
         "dependencies": [
@@ -131,6 +132,37 @@
             "path": "../node_modules/aurelia-testing/dist/amd",
             "main": "aurelia-testing",
             "env": "dev"
+          },
+          {
+            "name": "nprogress",
+            "path": "../node_modules/nprogress",
+            "main":"nprogress"
+          },
+          {
+            "name": "numeral",
+            "path": "../node_modules/numeral",
+            "main":"numeral"
+          },
+          {
+            "name": "firebase",
+            "path": "../node_modules/firebase",
+            "main":"firebase"
+          },
+          {
+            "name": "moment",
+            "path": "../node_modules/moment",
+            "main":"moment"
+          },
+          "jquery",
+          {
+            "name": "bootstrap",
+            "path": "../node_modules/bootstrap/dist",
+            "main": "js/bootstrap.min",
+            "deps": ["jquery"],
+            "exports": "$",
+            "resources": [
+              "css/bootstrap.css"
+            ]
           }
         ]
       }

@@ -1,0 +1,36 @@
+.title-artist-:before { content: "Artists" }
+.title-artist-complete:before { content: "Complete Artists" }
+.title-artist-incomplete:before { content: "Incomplete Artists" }
+.title-artist-active:before { content: "Active Artists" }
+
+.fa-artist-complete:before { content: "\f00c" } /* check */
+.fa-artist-incomplete:before { content: "\f06a" } /* exclamation-circle */
+.fa-artist-active:before { content: "\f04b" } /* play */
+
+.fa-artist-type-m:before { content: "\f183" } /* male */
+.fa-artist-type-f:before { content: "\f182" } /* female */
+.fa-artist-type-d:before { content: "\f183\f183" }
+.fa-artist-type-g:before { content: "\f183\f183\f183" }
+.fa-artist-type-mm:before { content: "\f183\f183" }
+.fa-artist-type-mf:before { content: "\f183\f182" }
+.fa-artist-type-fm:before { content: "\f182\f183" }
+.fa-artist-type-ff:before { content: "\f182\f182" }
+.fa-artist-type-mmm:before { content: "\f183\f183\f183" }
+.fa-artist-type-mmf:before { content: "\f183\f183\f182" }
+.fa-artist-type-fmm:before { content: "\f182\f183\f183" }
+.fa-artist-type-ffm:before { content: "\f182\f182\f183" }
+.fa-artist-type-fff:before { content: "\f182\f182\f182" }
+
+.fa-artist-role-singer:before { content: "\f130" } /* microphone */
+.fa-artist-role-rapper:before { content: "\f130" } /* microphone */
+.fa-artist-role-vocalist:before { content: "\f130" } /* microphone */
+.fa-artist-role-songwriter:before { content: "\f040" } /* pencil */
+.fa-artist-role-lyricist:before { content: "\f040" } /* pencil */
+.fa-artist-role-producer:before { content: "\f066" } /* compress/combine */
+.fa-artist-role-musician:before { content: "\f001" } /* musical note */
+.fa-artist-role-bassist:before { content: "\f001" } /* musical note */
+.fa-artist-role-drummer:before { content: "\f001" } /* musical note */
+.fa-artist-role-guitarist:before { content: "\f001" } /* musical note */
+.fa-artist-role-keyboardist:before { content: "\f001" } /* musical note */
+.fa-artist-role-pianist:before { content: "\f001" } /* musical note */
+.fa-artist-role-saxophonist:before { content: "\f001" } /* musical note */

@@ -1,0 +1,7 @@
+.title-song-:before { content: "Songs" }
+.title-song-unscored:before { content: "Unscored Songs" }
+.title-song-sample:before { content: "Sample of Songs" }
+
+.fa-song-remake:before { content: "\f021" } /* refresh */
+.fa-song-remix:before { content: "\f074" } /* remix */
+.fa-song-sample:before { content: "\f1b8" } /* recycle */

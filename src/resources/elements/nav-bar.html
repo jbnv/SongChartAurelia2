@@ -1,0 +1,70 @@
+<template bindable="router">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-music"></i>
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+        <li class="${router.history.fragment == '/songs' || router.history.fragment.startsWith('/song/') ? 'active' : ''}">
+          <a href="#/songs"><i class="fa fa-song"></i> Songs</a>
+        </li>
+
+        <li class="dropdown ${router.history.fragment == '/artists' || router.history.fragment.startsWith('/artist/') ? 'active' : ''}">
+          <a href="#/artists"><i class="fa fa-artist"></i> Artists</a>
+          <ul class="dropdown-menu">
+            <li><a href="#/artists">All</a></li>
+            <li><a href="#/artists/incomplete">Incomplete</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown ${router.history.fragment == '/decades' || router.history.fragment.startsWith('/decade/') || router.history.fragment == '/years' || router.history.fragment.startsWith('/year/') || router.history.fragment == '/months' || router.history.fragment.startsWith('/month/') ? 'active' : ''}">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar"></i> Eras</a>
+          <ul class="dropdown-menu">
+            <li><a href="#/decades">Decades</a></li>
+            <li><a href="#/years">Years</a></li>
+          </ul>
+        </li>
+
+        <li class="${router.history.fragment == '/playlists' || router.history.fragment.startsWith('/playlist/') ? 'active' : ''}">
+          <a href="#/playlists"><i class="fa fa-playlist"></i> Playlists</a>
+        </li>
+
+        <li class="${router.history.fragment == '/genres' || router.history.fragment.startsWith('/genre/') ? 'active' : ''}">
+          <a href="#/genres"><i class="fa fa-genre"></i> Genres</a>
+        </li>
+
+        <li class="${router.history.fragment == '/sources' || router.history.fragment.startsWith('/source/') ? 'active' : ''}">
+          <a href="#/sources"><i class="fa fa-source"></i> Sources</a>
+        </li>
+
+        <li class="${router.history.fragment == '/locations' || router.history.fragment.startsWith('/location/') ? 'active' : ''}">
+          <a href="#/locations"><i class="fa fa-location"></i> Locations</a>
+        </li>
+
+      </ul>
+
+      <form class="navbar-form navbar-right" role="search">
+       <div class="form-group">
+         <input type="text" class="form-control" placeholder="Search" value.bind="searchTerm">
+       </div>
+       <button click.trigger="search()" type="submit" class="btn btn-default"><i class.bind="searchButtonClass()"></i></button>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="loader" if.bind="router.isNavigating">
+          <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
