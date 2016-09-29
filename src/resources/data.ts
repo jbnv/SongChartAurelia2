@@ -9,7 +9,7 @@ export class Data extends ReactiveCollection {
   parameters = {};
   navModel = null;
 
-  massage(data) {}
+  massage() {}
 
   // refresh() {
   //   let fetchRoute = this.fetchRoute;

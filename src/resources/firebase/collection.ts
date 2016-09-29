@@ -22,6 +22,7 @@ export class ReactiveCollection {
 
   viewFilters = []; // array of functions on which to filter the data
   viewSortFn = (a,b) => 0; // default: do nothing
+  viewSortOrder = true; // allows for easy reversing of sort order
 
   // Returns a Promise that items will actually be available.
   waitForItems(retriesAllowed) : Firebase.Promise<any> {
@@ -54,6 +55,7 @@ export class ReactiveCollection {
 
     subset = this.viewFilters.reduce((prev,fn) => prev.filter(fn), subset);
     subset.sort(this.viewSortFn);
+    if (!this.viewSortOrder) subset = subset.reverse();
     return subset;
   }
 

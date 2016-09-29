@@ -3,22 +3,20 @@ import * as Transform from './transform';
 
 export class Collection extends Data {
 
-  content = [];
   sortColumn = "title";
-  sortOrder = true; // true = normal; false = reverse;
 
   maxSongCount = 0.00;
   maxSongAdjustedAverage = 0.00;
   maxArtistCount = 0.00;
   maxArtistAdjustedAverage = 0.00;
 
-  sort(column,fn) {
+  sort(column,fn = null) {
 
     if (this.sortColumn == column) {
-      this.sortOrder = !this.sortOrder;
+      this.viewSortOrder = !this.viewSortOrder;
     } else {
       this.sortColumn = column;
-      this.sortOrder = true;
+      this.viewSortOrder = true;
     }
 
     if (!fn) {
@@ -35,9 +33,8 @@ export class Collection extends Data {
       }
     }
 
-    var outbound = (this.content || []).sort(fn);
-    if (!this.sortOrder) outbound = outbound.reverse();
-    this.content = outbound;
+    this.viewSortFn =  fn;
+    return this.view;
   }
 
   sortByRank()        { this.sort("rank"); }
@@ -87,10 +84,10 @@ export class Collection extends Data {
 
   }
 
-  massage = (inbound) => {
-    this.content = inbound;
-    this.items = this.content.items || [];
-    this.items.forEach(item => item.visible = true);
+  massage() {
+    // this.content = inbound;
+    // this.items = this.content.items || [];
+    // this.items.forEach(item => item.visible = true);
   }
 
 }
