@@ -1,0 +1,53 @@
+<template>
+  <require from="./decimal"></require>
+
+  <section>
+    <h2>Genres <span class="badge">${content.length}</span></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="${sortColumn === 'title' ? 'active' : ''}">
+            <a click.trigger="sortByTitle()">Title</a>
+          </th>
+          <th class="${sortColumn === 'artistCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByArtistCount()">Artists</a>
+          </th>
+          <th class="${sortColumn === 'songCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySongCount()">Songs</a>
+          </th>
+          <th class="${sortColumn === 'score' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByScore()">Score</a>
+          </th>
+          <th class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySAA()">SAA</a>
+          </th>
+          <th class="${sortColumn === 'artistAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByAAA()">AAA</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="genre of items">
+          <td>
+            <a href="#/genre/${genre.instanceSlug}">${genre.title}</a>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="genre.artists.length > 0">${genre.artists.length || 0}</span>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="genre.songs.length > 0">${genre.songs.length || 0}</span>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="genre.score > 0">${genre.score | decimal:2}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="genre.score > 0">${genre.songAdjustedAverage | decimal:2}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="genre.score > 0 && genre.artists.length > 0">${genre.artistAdjustedAverage | decimal:2}</span></td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
