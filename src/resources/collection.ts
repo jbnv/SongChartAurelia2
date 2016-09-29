@@ -58,7 +58,8 @@ export class Collection extends Data {
 
   aggregate() {
 
-    this.content.forEach(item => {
+    for (var slug in this.items) {
+      let item = this.items[slug];
 
       if (item.songs && item.songs.length > 0) {
         item.songCount = item.songs.length;
@@ -80,11 +81,11 @@ export class Collection extends Data {
       if (item.ArtistAdjustedAverage > this.maxArtistAdjustedAverage) {
         this.maxArtistAdjustedAverage = item.ArtistAdjustedAverage;
       }
-    });
+    }
 
   }
 
-  massage() {
+  massage(data) {
     // this.content = inbound;
     // this.items = this.content.items || [];
     // this.items.forEach(item => item.visible = true);
