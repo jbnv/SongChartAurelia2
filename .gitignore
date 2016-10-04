@@ -1,4 +1,5 @@
 node_modules
+scripts
 .idea
 .DS_STORE
 src/resources/firebase-config.ts
