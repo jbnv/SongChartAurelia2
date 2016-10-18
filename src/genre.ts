@@ -2,7 +2,7 @@ import {Data} from './resources/data';
 
 export class Genre extends Data {
 
-  fetchRouteFn = (parameters) => 'genre/'+parameters.slug;
+  fetchRouteFn = (parameters) => 'genres/compiled/'+parameters.slug;
 
   title = '(Genre)';
   slug = "";
@@ -10,10 +10,6 @@ export class Genre extends Data {
   children = [];
   artists = [];
   songs = [];
-
-  constructor(http) {
-    super(http);
-  }
 
   massage(inbound) {
     this.title = inbound.title;
