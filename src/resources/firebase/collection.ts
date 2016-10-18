@@ -10,16 +10,15 @@ export class ReactiveCollection {
   _events: EventAggregator
   items: any; // firebase will return an object keyed to object IDs.
 
-  constructor(path: string, onValue: any) {
-    console.log("path",path); //TEMP
+  onValue = (value) => {};
+
+  constructor() {
     if (!Container || !Container.instance) throw Error('Container has not been made global');
     let config = Container.instance.get(Configuration);
     if (!config) throw Error('Configuration has not been set');
     this._events = Container.instance.get(EventAggregator);
-
-    this._query = firebase.database().ref(path);
-    this._listenToQuery(this._query,onValue);
   }
+
 
   viewFilters = []; // array of functions on which to filter the data
   viewSortFn = (a,b) => 0; // default: do nothing
@@ -39,6 +38,11 @@ export class ReactiveCollection {
 
       check(); // invoke check once to start the cycle
     });
+  }
+
+  setPath(pathString,onValue) {
+    this._query = firebase.database().ref(pathString);
+    this._listenToQuery(this._query,onValue);
   }
 
   // view(): Returns items as a filtered and sorted array.

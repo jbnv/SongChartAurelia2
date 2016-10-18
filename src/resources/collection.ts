@@ -85,10 +85,4 @@ export class Collection extends Data {
 
   }
 
-  massage(data) {
-    // this.content = inbound;
-    // this.items = this.content.items || [];
-    // this.items.forEach(item => item.visible = true);
-  }
-
 }
