@@ -1,4 +1,4 @@
-import * as Firebase from 'firebase';
+import 'firebase';
 import {Container} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Configuration} from './configuration';
@@ -8,16 +8,17 @@ export class ReactiveCollection {
 
   _query = null;
   _events: EventAggregator
-  items: any; // Firebase will return an object keyed to object IDs.
+  items: any; // firebase will return an object keyed to object IDs.
 
-  constructor(path: string) {
+  constructor(path: string, onValue: any) {
+    console.log("path",path); //TEMP
     if (!Container || !Container.instance) throw Error('Container has not been made global');
     let config = Container.instance.get(Configuration);
     if (!config) throw Error('Configuration has not been set');
     this._events = Container.instance.get(EventAggregator);
 
-    this._query = Firebase.database().ref(path);
-    this._listenToQuery(this._query);
+    this._query = firebase.database().ref(path);
+    this._listenToQuery(this._query,onValue);
   }
 
   viewFilters = []; // array of functions on which to filter the data
@@ -25,8 +26,8 @@ export class ReactiveCollection {
   viewSortOrder = true; // allows for easy reversing of sort order
 
   // Returns a Promise that items will actually be available.
-  waitForItems(retriesAllowed) : Firebase.Promise<any> {
-    return new Firebase.Promise<any>(() => {
+  waitForItems(retriesAllowed) : firebase.Promise<any> {
+    return new firebase.Promise<any>(() => {
       var retriesMade = 0;
 
       var check = () => {
@@ -59,14 +60,14 @@ export class ReactiveCollection {
     return subset;
   }
 
-  add(item:any,key:string = null) : Firebase.Promise<Object> {
+  add(item:any,key:string = null) : firebase.Promise<Object> {
     if (key) {
       return this._query.child(key).set(item);
     }
     return this._query.push(item);
   }
 
-  remove(item: any): Firebase.Promise<Object> {
+  remove(item: any): firebase.Promise<Object> {
     if (item === null || item.__firebaseKey__ === null) {
       return Promise.reject({message: 'Unknown item'});
     }
@@ -78,17 +79,19 @@ export class ReactiveCollection {
     return this.items[key];
   }
 
-  removeByKey(key): Firebase.Promise<Object> {
+  removeByKey(key): firebase.Promise<Object> {
     return this._query.child(key).remove();
   }
 
-  clear(): Firebase.Promise<Object> {
+  clear(): firebase.Promise<Object> {
     return this._query.remove();
   }
 
-  _listenToQuery(query) {
+  _listenToQuery(query,callback) {
     query.on('value', (snapshot) => {
       this.items = this._valueFromSnapshot(snapshot);
+      console.log("items",this.items); //TEMP
+      if (callback) callback(this.items);
     });
   }
 

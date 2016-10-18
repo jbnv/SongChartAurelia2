@@ -1,19 +1,19 @@
-import * as Firebase from 'firebase';
+import 'firebase';
 import {inject} from 'aurelia-dependency-injection';
 import {EventAggregator} from 'aurelia-event-aggregator';
 
 import {Configuration} from './configuration';
 
-export function currentUser() : Firebase.User {
-  return Firebase.auth().currentUser;
+export function currentUser() : firebase.User {
+  return firebase.auth().currentUser;
 }
 
 export function isAuthenticated() : boolean {
-  return Firebase.auth().currentUser != null;
+  return firebase.auth().currentUser != null;
 }
 
 /**
- * Handles Firebase authentication features
+ * Handles firebase authentication features
  */
 @inject(Configuration,EventAggregator)
 export class AuthenticationManager {
@@ -28,7 +28,7 @@ export class AuthenticationManager {
    */
   constructor(configuration: Configuration, eventAggregator: EventAggregator)
   {
-    this._firebase = Firebase.database().ref();
+    this._firebase = firebase.database().ref();
     this._events = eventAggregator;
 
     // Register auth state changed event.
@@ -44,13 +44,13 @@ export class AuthenticationManager {
    * Creates a new user but does not authenticate him.
    * @param {string} email - The user email
    * @param {string} password - The user password
-   * @returns {Firebase.Promise<any>} - Returns a promise which on completion will return the user infos
+   * @returns {firebase.Promise<any>} - Returns a promise which on completion will return the user infos
    */
-  createUser(email, password): Firebase.Promise<any> {
-    return Firebase.auth().createUserWithEmailAndPassword(email, password)
+  createUser(email, password): firebase.Promise<any> {
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
         this._events.publish('user-created',result);
-        return Firebase.auth().currentUser;
+        return firebase.auth().currentUser;
       })
   }
 
@@ -58,13 +58,13 @@ export class AuthenticationManager {
    * Sign in a user with a password.
    * @param {string} email - The user email
    * @param {string} password - The user password
-   * @returns {Firebase.Promise<any>} Returns a promise which on completion will return user infos
+   * @returns {firebase.Promise<any>} Returns a promise which on completion will return user infos
    */
-  signIn(email, password): Firebase.Promise<any> {
-    return Firebase.auth().signInWithEmailAndPassword(email, password)
+  signIn(email, password): firebase.Promise<any> {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result => {
         this._events.publish('user-signin',result);
-        return Firebase.auth().currentUser;
+        return firebase.auth().currentUser;
       });
   }
 
@@ -72,9 +72,9 @@ export class AuthenticationManager {
    * Creates a user and automatically sign in if creation succeed
    * @param {string} email - The user email
    * @param {string} password - The user password
-   * @returns {Firebase.Promise<any>} - Returns a promise which on completion will return user infos
+   * @returns {firebase.Promise<any>} - Returns a promise which on completion will return user infos
    */
-  createUserAndSignIn(email, password): Firebase.Promise<any> {
+  createUserAndSignIn(email, password): firebase.Promise<any> {
     return this.createUser(email, password).then(() => {
       return this.signIn(email, password);
     });
@@ -84,8 +84,8 @@ export class AuthenticationManager {
    * Sign out any authenticated user
    * @returns {Promise} - Returns a promise
    */
-  signOut(): Firebase.Promise<any> {
-    return Firebase.auth().signOut().then(result => {
+  signOut(): firebase.Promise<any> {
+    return firebase.auth().signOut().then(result => {
       this._events.publish('user-signout',result);
       return result;
     });
@@ -99,8 +99,8 @@ export class AuthenticationManager {
    * @param {string} newEmail - The new email
    * @returns {Promise} - Returns a promise which on completion will return an object containing the old and new email
    */
-  changeEmail(oldEmail, password, newEmail): Firebase.Promise<any> {
-    var user = Firebase.auth().currentUser;
+  changeEmail(oldEmail, password, newEmail): firebase.Promise<any> {
+    var user = firebase.auth().currentUser;
     return user.updateEmail(newEmail).then(function() {
       let result = { oldEmail: oldEmail, newEmail: newEmail };
       this._events.publish('user-email-changed',result);
@@ -114,8 +114,8 @@ export class AuthenticationManager {
    * @param {string} oldPassword - The current password
    * @param {string} newPassword - The new password
    */
-  changePassword(email, oldPassword, newPassword): Firebase.Promise<any> {
-    var user = Firebase.auth().currentUser;
+  changePassword(email, oldPassword, newPassword): firebase.Promise<any> {
+    var user = firebase.auth().currentUser;
     return user.updatePassword(newPassword).then(function() {
       let result = { oldPassword: oldPassword, newPassword: newPassword };
       this._events.publish('user-password',result);
@@ -128,8 +128,8 @@ export class AuthenticationManager {
    * @param {string} email - The users's email
    * @param {string} password - The user's password
    */
-  deleteUser(email: string, password: string): Firebase.Promise<any> {
-    var user = Firebase.auth().currentUser;
+  deleteUser(email: string, password: string): firebase.Promise<any> {
+    var user = firebase.auth().currentUser;
     return user.delete().then(function() {
       let result = { email: email };
       this._events.publish('user-deleted',result);
