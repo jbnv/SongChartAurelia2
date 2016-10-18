@@ -85,4 +85,8 @@ export class Collection extends Data {
 
   }
 
+  massage(inbound) {
+    this.items = inbound
+  }
+
 }

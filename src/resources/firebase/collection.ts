@@ -94,7 +94,6 @@ export class ReactiveCollection {
   _listenToQuery(query,callback) {
     query.on('value', (snapshot) => {
       this.items = this._valueFromSnapshot(snapshot);
-      console.log("items",this.items); //TEMP
       if (callback) callback(this.items);
     });
   }
