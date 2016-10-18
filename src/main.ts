@@ -1,6 +1,6 @@
 import {Aurelia} from 'aurelia-framework'
 import environment from './environment';
-import * as Firebase from 'firebase';
+import 'firebase';
 import 'bootstrap';
 import * as fbConfig from './resources/firebase-config';
 
@@ -27,7 +27,7 @@ export function configure(aurelia: Aurelia) {
   }
 
   aurelia.start().then(() => {
-    Firebase.initializeApp(fbConfig.initConfig);
+    firebase.initializeApp(fbConfig.initConfig);
     aurelia.setRoot();
   });
 }
