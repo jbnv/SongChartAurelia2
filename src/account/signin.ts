@@ -1,4 +1,4 @@
-import * as Firebase from 'firebase';
+import 'firebase';
 import {FirebaseModule,ReactiveCollection} from '../resources/firebase/index';
 
 export class SignIn extends FirebaseModule {
@@ -10,12 +10,12 @@ export class SignIn extends FirebaseModule {
     this.authManager.signIn(this.email, this.password)
     .then((fbUser) => {
       //++ This is ugly and should be encapsulated.
-      Firebase.database().ref(`users/${fbUser.uid}/role`).once('value')
+      firebase.database().ref(`users/${fbUser.uid}/role`).once('value')
       .then((snapshot) => {
         if (snapshot.val() == "disabled") {
           throw new Error("Your account is disabled.");
         }
-        this.router.navigateToRoute('jogIndex');
+        this.router.navigateToRoute('welcome');
         return true;
       })
       .catch((e) => {
