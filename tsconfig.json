@@ -19,7 +19,8 @@
     "./src/**/*.ts",
     "./test/**/*.ts",
     "./typings/index.d.ts",
-    "./custom_typings/**/*.d.ts"
+    "./custom_typings/**/*.d.ts",
+    "./typings/globals/numeraljs/numeraljs.d.ts"
   ],
   "atom": {
     "rewriteTsconfig": false

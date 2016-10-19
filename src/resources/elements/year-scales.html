@@ -1,0 +1,24 @@
+<template>
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-2">
+          <compose view-model="decade-count-graph" model.bind="decades"></compose>
+        </div>
+        <div class="col-xs-10">
+          <compose view-model="year-count-graph" model.bind="years"></compose>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <compose view-model="decade-saa-graph" model.bind="decades"></compose>
+        </div>
+        <div class="col-xs-10">
+          <compose view-model="year-saa-graph" model.bind="years"></compose>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</template>
