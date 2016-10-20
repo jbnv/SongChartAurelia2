@@ -1,4 +1,5 @@
 <template>
+  <require from="./resources/value-converters/from-now"></require>
 
   <div class="container">
     <div class="row">
@@ -44,6 +45,14 @@
         <div class="list-group">
           <a class="list-group-item" href="https://github.com/jbnv/SongChartAurelia"><i class="fa-fw fa fa-external-link"></i> UI Repository</a>
           <a class="list-group-item" href="https://github.com/jbnv/SongChartData"><i class="fa-fw fa fa-external-link"></i> Data Repository</a>
+        </div>
+
+        <h2>Recents</h2>
+
+        <div class="list-group">
+          <a class="list-group-item" href="#/${item.route}" repeat.for="item of history.recents">
+            <i class="fa-fw fa fa-circle"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
+          </a>
         </div>
 
       </div>
