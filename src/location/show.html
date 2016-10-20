@@ -1,0 +1,15 @@
+<template>
+  <section>
+    <h2>${title}</h2>
+  </section>
+  <section>
+    <h3>Artists</h3>
+    <table>
+      <tr repeat.for="artist of artists">
+        <td>
+          <a href="#/artist/${artist.instanceSlug}">${artist.title}</a>
+        </td>
+      </tr>
+    </table>
+  </section>
+</template>

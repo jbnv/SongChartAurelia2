@@ -1,0 +1,47 @@
+<template>
+  <require from="../decimal"></require>
+
+  <section>
+    <h2>Locations  <span class="badge">${content.length}</span></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="${sortColumn === 'title' ? 'active' : ''}">
+            <a click.trigger="sortByTitle()">Title</a>
+          </th>
+          <th class="${sortColumn === 'artistCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByArtistCount()">Artists</a>
+          </th>
+          <th class="${sortColumn === 'artistAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByAAA()">AAA</a>
+          </th>
+          <th class="${sortColumn === 'songCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySongCount()">Songs</a>
+          </th>
+          <th class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortByAAA()">AAA</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="location of view">
+          <td>
+            <a href="#/source/${location.instanceSlug}">${location.title}</a>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="location.artistCount > 0">${location.artistCount || 0}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="location.artistAdjustedAverage > 0">${location.artistAdjustedAverage | decimal:2}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="location.songCount > 0">${location.songCount || 0}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="location.songAdjustedAverage > 0">${location.songAdjustedAverage | decimal:2}</span></td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>

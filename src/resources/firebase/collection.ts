@@ -47,18 +47,21 @@ export class ReactiveCollection {
 
   // view(): Returns items as a filtered and sorted array.
   get view() {
-
+    if (!this.items) return [];
     let rawItems = this.items;
     let subset = [];
     for (var key in rawItems) {
       if (key !== "__firebaseKey__") {
         var item = rawItems[key];
+        if (!item || item === true) item = {};
         item.key = key;
         subset.push(item);
       }
     }
 
-    subset = this.viewFilters.reduce((prev,fn) => prev.filter(fn), subset);
+    if (this.viewFilters && this.viewFilters.length > 0) {
+      subset = this.viewFilters.reduce((prev,fn) => prev.filter(fn), subset);
+    }
     subset.sort(this.viewSortFn);
     if (!this.viewSortOrder) subset = subset.reverse();
     return subset;
