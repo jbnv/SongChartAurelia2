@@ -10,8 +10,10 @@ export class ScaleGraph {
     return Math.floor(parseFloat(o.songAdjustedAverage) * 100) / 100;
   }
 
+  // items: object (associative array)
   activate(items) {
-    // items: object (associative array)
+
+    if (!items) { items = {}; }
 
     // Determine maximum value.
     let max = 1;

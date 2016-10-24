@@ -1,4 +1,4 @@
-import {Era} from '../era';
+import * as gregoria from 'gregoria';
 
 export class YearScales {
 
@@ -23,14 +23,15 @@ export class YearScales {
       this.decades[decade] = {title:title, songCount:0, score:0};
     }
 
-    for (let year = 1950; year <= 2016; year++) {
+    for (let year = 1950; year <= 2017; year++) {
       let title = (""+year).substr(2,1)+" "+(""+year).substr(3,1);
       this.years[year] = {title:title, songCount:0, score:0};
     }
 
-    songs.forEach(song => {
+    for (let songSlug in (songs || {})) {
+      let song = songs[songSlug];
       if (!song.debutEra) {
-        song.debutEra = new Era(song.debut);
+        song.debutEra = new gregoria(song.debut);
       }
       let decade = song.debutEra.decade;
       if (decade) {
@@ -42,7 +43,7 @@ export class YearScales {
         this.years[year].songCount++;
         this.years[year].score += song.score;
       }
-    })
+    }
 
     let maxCount = 1; // ensure that divisor is always greater than 0
     let maxAA = 0.01;
@@ -87,4 +88,5 @@ export class YearScales {
     });
 
   }
+
 }
