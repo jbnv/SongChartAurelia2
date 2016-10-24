@@ -1,13 +1,17 @@
 <template>
   <require from="./resources/value-converters/from-now"></require>
+  <require from="./resources/elements/decade-count-graph"></require>
+  <require from="./resources/elements/decade-saa-graph"></require>
+  <require from="./resources/elements/year-count-graph"></require>
+  <require from="./resources/elements/year-saa-graph"></require>
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-3 col-md-2 col-xs-1">
-      </div>
-      <div class="col-lg-6 col-md-8 col-xs-10">
+      <div class="col-xs-6">
 
         <br />
+
+        <h2>Lists</h2>
 
         <div class="list-group">
           <a class="list-group-item" href="#/songs">
@@ -42,10 +46,20 @@
           </a>
         </div>
 
-        <div class="list-group">
-          <a class="list-group-item" href="https://github.com/jbnv/SongChartAurelia"><i class="fa-fw fa fa-external-link"></i> UI Repository</a>
-          <a class="list-group-item" href="https://github.com/jbnv/SongChartData"><i class="fa-fw fa fa-external-link"></i> Data Repository</a>
-        </div>
+        <h2>Decades</h2>
+
+        <compose view-model="./resources/elements/decade-count-graph" model.bind="decades"></compose>
+        <compose view-model="./resources/elements/decade-saa-graph" model.bind="decades"></compose>
+
+        <h2>Years</h2>
+
+        <compose view-model="./resources/elements/year-count-graph" model.bind="years"></compose>
+        <compose view-model="./resources/elements/year-saa-graph" model.bind="years"></compose>
+
+      </div>
+      <div class="col-xs-6">
+
+        <br />
 
         <h2>Recents</h2>
 
@@ -53,6 +67,15 @@
           <a class="list-group-item" href="#/${item.route}" repeat.for="item of history.recents">
             <i class="fa-fw fa fa-circle"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
           </a>
+        </div>
+
+        <h2>External Links</h2>
+
+        <div class="list-group">
+          <a class="list-group-item" href="https://github.com/jbnv/SongChartAurelia"><i class="fa-fw fa fa-external-link"></i> UI Repository (v1)</a>
+          <a class="list-group-item" href="https://github.com/jbnv/SongChartAurelia2"><i class="fa-fw fa fa-external-link"></i> UI Repository (v2)</a>
+          <a class="list-group-item" href="https://github.com/jbnv/SongChartData"><i class="fa-fw fa fa-external-link"></i> Data Repository</a>
+          <a class="list-group-item" href="https://github.com/jbnv/SongChartDataFirebase"><i class="fa-fw fa fa-external-link"></i> Firebase Compiler</a>
         </div>
 
       </div>
