@@ -134,6 +134,11 @@
             "env": "dev"
           },
           {
+            "name": "gregoria",
+            "path": "../node_modules/gregoria",
+            "main": "index"
+          },
+          {
             "name": "nprogress",
             "path": "../node_modules/nprogress",
             "main":"nprogress"
@@ -147,6 +152,11 @@
             "name": "firebase",
             "path": "../node_modules/firebase",
             "main":"firebase"
+          },
+          {
+            "name": "firehash",
+            "path": "../node_modules/firehash",
+            "main": "index"
           },
           {
             "name": "moment",
