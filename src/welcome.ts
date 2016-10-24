@@ -15,22 +15,8 @@ export class Welcome extends Data {
     this.summary = inbound;
     this.history = new History();
 
-    this.decades = {};
-    this.years = {};
-
-    for (let decadeSlug in inbound.decades) {
-      this.decades[decadeSlug] = {
-        songCount: inbound.decades[decadeSlug].count,
-        songAdjustedAverage: inbound.decades[decadeSlug].score
-      }
-    }
-
-    for (let yearSlug in inbound.years) {
-      this.years[yearSlug] = {
-        songCount: inbound.years[yearSlug].count,
-        songAdjustedAverage: inbound.years[yearSlug].score
-      }
-    }
+    this.decades = inbound.decades;
+    this.years = inbound.years;
 
   } // massage
 

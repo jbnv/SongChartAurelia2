@@ -7,7 +7,7 @@ export class ScaleGraph {
 
   saa(o) {
     // return numeral( || 0).format("0.00")
-    return Math.floor(parseFloat(o.songAdjustedAverage) * 100) / 100;
+    return Math.floor(parseFloat(o.score) * 100) / 100;
   }
 
   // items: object (associative array)

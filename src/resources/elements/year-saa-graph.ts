@@ -11,10 +11,12 @@ export class YearSaaGraph extends ScaleGraph {
   transformFn = function(year) {
     return {
       "ordinal": year.slug,
-      "value": year.songAdjustedAverage,
+      "value": year.count,
       "route": "year/"+year.slug,
       "tooltip": year.slug+": "+this.saa(year),
-      "highlight": year.highlight
+      "highlight": year.highlight,
+      "leader": year.leader,
+      "lagger": year.lagger
     };
   }
 }

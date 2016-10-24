@@ -7,9 +7,11 @@ export class DecadeCountGraph extends ScaleGraph {
   transformFn = function(decade) {
     return {
       ordinal: parseInt(decade.slug.substring(0,4)),
-      value: decade.songCount || 0,
+      value: decade.count || 0,
       route: "decade/"+decade.slug,
-      tooltip: decade.slug+"s: "+decade.songCount
+      tooltip: decade.slug+"s: "+decade.count,
+      leader: decade.leader,
+      lagger: decade.lagger
     };
   };
 

@@ -11,9 +11,11 @@ export class YearCountGraph extends ScaleGraph {
   transformFn = function(year) {
     return {
       ordinal: year.slug,
-      value: year.songCount || 0,
+      value: year.count || 0,
       route: "year/"+year.slug,
-      tooltip: year.slug+": "+year.songCount
+      tooltip: year.slug+": "+year.count,
+      leader: year.leader,
+      lagger: year.lagger
     };
   }
 
