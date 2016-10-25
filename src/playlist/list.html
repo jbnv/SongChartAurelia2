@@ -1,0 +1,35 @@
+<template>
+  <require from="../resources/value-converters/decimal"></require>
+
+  <section>
+    <h2>Playlists  <span class="badge">${content.length}</span></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="${sortColumn === 'title' ? 'active' : ''}">
+            <a click.trigger="sortByTitle()">Title</a>
+          </th>
+          <th class="${sortColumn === 'songCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySongCount()">Songs</a>
+          </th>
+          <th class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySAA()">SAA</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="playlist of view">
+          <td>
+            <a href="#/playlist/${playlist.instanceSlug}">${playlist.title}</a>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="playlist.songCount > 0">${playlist.songCount || 0}</span>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="playlist.songAdjustedAverage > 0">${playlist.songAdjustedAverage | decimal:2}</span></td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
