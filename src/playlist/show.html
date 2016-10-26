@@ -1,0 +1,23 @@
+<template>
+  <require from="../resources/elements/song-table"></require>
+
+  <section>
+    <h2>${title}</h2>
+    <p>${description}</p>
+  </section>
+
+  <section>
+    <compose view-model="../resources/elements/year-scales" model.bind="songs"></compose>
+  </section>
+
+  <section>
+    <h3>Songs <span class="badge">${songCount}</span></h3>
+    <song-table
+      path="playlists/compiled/${slug}/songs"
+      show-only.bind="showOnly" 
+      sort-slug.bind="sort"
+      subset-slug="playlist:${slug}"
+    ></song-table>
+  </section>
+
+</template>
