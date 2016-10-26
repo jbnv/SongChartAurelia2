@@ -10,7 +10,7 @@ export class History extends ReactiveCollection {
   }
 
   mark(route,title) {
-    if (!route) return { "then": function() {} };
+    if (!route || !title) return { "then": function() {} };
     this._query.child(route).child("__title").set(title);
     return this._query.child(route).child("__timestamp").set(new Date().getTime());
   }
