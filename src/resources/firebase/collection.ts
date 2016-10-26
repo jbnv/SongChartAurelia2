@@ -41,6 +41,7 @@ export class ReactiveCollection {
   }
 
   setPath(pathString,onValue) {
+    if (!pathString) return; // This should never happen!
     this._query = firebase.database().ref(pathString);
     this._listenToQuery(this._query,onValue);
   }
