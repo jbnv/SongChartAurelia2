@@ -1,0 +1,191 @@
+<template>
+
+  <require from="../value-converters/decimal"></require>
+  <require from="../value-converters/object-values"></require>
+
+  <table class="table table-hover">
+    <thead>
+
+      <tr>
+
+        <th show.bind="!columns.rank.hidden" class="${sortColumn === 'rank' ? 'active' : ''}">
+          <a click.trigger="sortByRank()">Rank</a>
+        </th>
+
+        <th show.bind="!columns.overallRank.hidden" class="${sortColumn === 'rank' ? 'active' : ''}">
+          <a click.trigger="sortByOverallRank()">OR</a>
+        </th>
+
+        <th show.bind="!columns.title.hidden" class="${sortColumn === 'title' ? 'active' : ''}">
+          <a click.trigger="sortByTitle()">Title</a>
+        </th>
+
+    		<th show.bind="!columns.artist.hidden">
+    			Artist(s)
+    		</th>
+
+        <th show.bind="!columns.genre.hidden">
+    			Genre(s)
+    		</th>
+
+        <th show.bind="!columns.source.hidden">
+    			Source(s)
+    		</th>
+
+        <th>
+    			&nbsp;
+    		</th>
+
+        <th show.bind="!columns.debutDate.hidden" class="${sortColumn === 'debutDate' ? 'active' : ''}">
+          <a click.trigger="sortByDebutDate()">Debut</a>
+        </th>
+
+        <th show.bind="!columns.score.hidden" class="${sortColumn === 'score' ? 'active' : ''}" style="text-align:right">
+          <a click.trigger="sortByScore()">Score</a>
+        </th>
+
+        <th show.bind="!columns.score.hidden">
+          &nbsp;
+        </th>
+
+    		<th show.bind="!columns.projectedRank.hidden"></th>
+
+    		<th show.bind="!columns.projectedRank.hidden" style="text-align:right">
+    			Projected Rank
+    		</th>
+
+    		<th show.bind="!columns.peakScore.hidden" style="text-align:right">
+    			PS
+    		</th>
+
+        <th show.bind="!columns.debutRank.hidden" style="text-align:right">
+    			DR
+    		</th>
+
+    		<th show.bind="!columns.peakRank.hidden" style="text-align:right">
+    			PR
+    		</th>
+
+        <th show.bind="!columns.duration.hidden" class="${sortColumn === 'duration' ? 'active' : ''}" style="text-align:right">
+          <a click.trigger="sortByDuration()">M</a>
+    		</th>
+
+        <th show.bind="!columns.ascent.hidden" class="${sortColumn === 'ascent' ? 'active' : ''}" style="text-align:right">
+          <a click.trigger="sortByAscent()">A</a>
+    		</th>
+
+        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" style="text-align:right">
+          <a click.trigger="sortByDescent()">D</a>
+    		</th>
+
+    	</tr>
+
+    </thead>
+    <tbody>
+
+      <tr repeat.for="song of view"
+          class="${(song.messages || []).length > 0 ? 'warning' : ''}">
+
+        <td show.bind="!columns.rank.hidden">${(song.ranks[subsetSlug] || {}).rank}</td>
+
+        <td show.bind="!columns.overallRank.hidden">${song.__rank}</td>
+
+        <td show.bind="!columns.title.hidden">
+          <a href="#/song/${song.__slug}">${song.title}</a>
+          <span class="small" if.bind="!columns.role.hidden && song.role !== true">
+            ${song.role}
+          </span>
+        </td>
+
+        <td show.bind="!columns.artist.hidden">
+          <span repeat.for="artist of titleArtists(song.artists)">
+            <a href="#/artist/${artist.slug}">${artist.title}</a>
+            <br>
+          </span>
+        </td>
+
+        <td show.bind="!columns.genre.hidden">
+          <span repeat.for="genre of song.genres | objectValues">
+            <a href="#/genre/${genre.instanceSlug}">${genre.title}</a>
+            <br>
+          </span>
+        </td>
+
+        <td show.bind="!columns.source.hidden">
+          <span repeat.for="source of song.sources | objectValues">
+            <a href="#/source/${source.instanceSlug}">${source.title}</a>
+            <br>
+          </span>
+        </td>
+
+        <td class="text-center">
+          <span if.bind="song.remake">
+            <a href="#/song/${song.remake}">
+              <i class="fa fa-song-remake"></i>
+            </a>
+          </span>
+          <span if.bind="song.remix">
+            <a href="#/song/${song.remix}">
+              <i class="fa fa-song-remix"></i>
+            </a>
+          </span>
+          <span if.bind="song.sample">
+            <a href="#/song/${song.sample}">
+              <i class="fa fa-song-sample"></i>
+            </a>
+          </span>
+    		</td>
+
+        <td show.bind="!columns.debutDate.hidden">
+          <a href="#/${song.debutEra.type}/${song.debutEra.slug}">
+            ${song.debut}
+          </a>
+        </td>
+
+        <td show.bind="!columns.score.hidden" style="text-align:right">
+          <span show.bind="song.score > 0">${song.score | decimal:2}</span>
+        </td>
+
+        <td show.bind="!columns.score.hidden" style="text-align:right">
+          <i class="fa fa-plus" show.bind="song.score < song.totalScore"></i>
+        </td>
+
+        <td show.bind="!columns.projectedRank.hidden">
+          <i class="fa fa-fw fa-star text-primary" show.bind="song.isDebut"></i>
+        </td>
+
+        <td show.bind="!columns.projectedRank.hidden" style="text-align:right">
+          <span show.bind="song.projectedRank > 0">${song.projectedRank | decimal:1}</span>
+        </td>
+
+        <td show.bind="!columns.peakScore.hidden" style="text-align:right">
+          <span>${song.peak | decimal:3}</span>
+        </td>
+
+        <td show.bind="!columns.debutRank.hidden" style="text-align:right">
+          <span show.bind="song.debutRank > 0">${song.debutRank | decimal:1}</span>
+        </td>
+
+        <td show.bind="!columns.peakRank.hidden" style="text-align:right">
+          <span show.bind="song.debutRank > 0">${song.peakRank | decimal:1}</span>
+        </td>
+
+        <td show.bind="!columns.duration.hidden" style="text-align:right">
+          <span show.bind="!columns.projectedRank.hidden">${song.monthIndex+1} / </span>${song.duration}
+        </td>
+
+        <td show.bind="!columns.ascent.hidden" style="text-align:right">
+          <span>${song["ascent-weeks"] | decimal:2}</span>
+        </td>
+
+        <td show.bind="!columns.descent.hidden" style="text-align:right">
+          <span>${song["descent-weeks"] | decimal:2}</span>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</template>
