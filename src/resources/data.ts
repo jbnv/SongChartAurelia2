@@ -13,7 +13,7 @@ export class Data extends ReactiveCollection {
 
   _massage(inbound) {
     console.log("Data.massage",inbound); //PERMANENT
-    this.title = inbound.title;
+    this.title = inbound.title || this.title;
 
     // Determine exact route for history.
     let route = this.route;

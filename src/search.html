@@ -1,0 +1,38 @@
+<template>
+  <require from="./resources/value-converters/decimal"></require>
+
+  <section>
+    <h2>
+      <i class="fa fa-search"></i> ${title}
+      <span class="badge">${content.length}</span>
+    </h2>
+  </section>
+
+  <section>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th><a click.trigger="sortByTitle()">Title</a></th>
+          <th style="text-align:center">Type</th>
+          <th style="text-align:right">
+            <a click.trigger="sortByScore()">Score</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="item of view">
+          <td>
+            <a href="#/${item.route}">${item.title}</a>
+          </td>
+          <td style="text-align:center">
+            ${item.type}
+            <!--i class="fa fa-${item.type}"></i-->
+          </td>
+          <td style="text-align:right">
+            <span if.bind="item.score > 0">${item.score | decimal:2}</span></td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
