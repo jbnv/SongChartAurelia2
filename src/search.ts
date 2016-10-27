@@ -8,4 +8,5 @@ export class Search extends Collection {
     super.activate(parameters,routeConfig);
     this.sortByScore();
   }
+  
 }
