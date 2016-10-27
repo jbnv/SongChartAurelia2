@@ -32,7 +32,6 @@ export class SongTableCustomElement extends Collection {
   });
 
   attached() {
-    console.log("SongTable.attached",this.path ,this.showOnly ,this.subsetSlug ,this.sortSlug); //TEMP
     this.setPath(this.path,this.massage.bind(this));
   }
 
@@ -44,10 +43,9 @@ export class SongTableCustomElement extends Collection {
 
     // Make sure that each song has good data.
     for (let songSlug in data) {
-      //console.log("SongTable.massage [50]",songSlug,data[songSlug]); //TEMP
       if (/^\_\_/.test(songSlug)) { delete data[songSlug]; continue; }
       if (!data[songSlug]) data[songSlug] = {};
-      if (/boolean|number|string/.test(data[songSlug])) data[songSlug] = { title: data[songSlug] }; // This should never happen!
+      if (/boolean|number|string/.test(typeof data[songSlug])) data[songSlug] = { title: data[songSlug] }; // This should never happen!
       let song = data[songSlug] || {};
       if (!song.artists) song.artists = {};
       if (!song.debutEra) song.debutEra = new gregoria(song.debut);
