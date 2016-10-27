@@ -9,10 +9,17 @@ export class History extends ReactiveCollection {
     this.setPath("history",null);
   }
 
-  mark(route,title) {
-    if (!route || !title) return { "then": function() {} };
-    this._query.child(route).child("__title").set(title);
-    return this._query.child(route).child("__timestamp").set(new Date().getTime());
+  mark(route,data) {
+    if (!route || !data) return { "then": function() {} };
+    var outbound = {
+      __title: data.title || null,
+      __type: data.type || null,
+      __timestamp: new Date().getTime(),
+      data: data
+    };
+    delete outbound.data.title;
+    delete outbound.data.type;
+    return this._query.child(route).set(outbound);
   }
 
   _listenToQuery(query) {
@@ -27,7 +34,9 @@ export class History extends ReactiveCollection {
           recents.push({
             route: route,
             title: obj.__title,
-            timestamp: obj.__timestamp
+            timestamp: obj.__timestamp,
+            type: obj.__type,
+            data: obj.data
           });
         }
         for (var key in obj) {

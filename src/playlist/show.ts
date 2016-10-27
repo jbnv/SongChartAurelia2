@@ -5,6 +5,7 @@ export class Playlist extends Data {
   fetchRouteFn = (parameters) => 'playlists/compiled/'+parameters.slug;
 
   title = '(Playlist)';
+  type = "playlist";
   description = "";
 
   songs = {};

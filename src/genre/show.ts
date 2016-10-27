@@ -5,6 +5,7 @@ export class Genre extends Data {
   fetchRouteFn = (parameters) => 'genres/compiled/'+parameters.slug;
 
   title = '(Genre)';
+  type = "genre";
   slug = "";
   parents = [];
   children = [];

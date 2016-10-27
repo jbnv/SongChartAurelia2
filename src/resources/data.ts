@@ -6,6 +6,7 @@ export class Data extends ReactiveCollection {
   title = "";
   subtitle = "";  // A subtitle for filtered results.
 
+  type: string;
   route = "";
   fetchRoute = "";
   fetchRouteFn = null;
@@ -14,15 +15,15 @@ export class Data extends ReactiveCollection {
   navModel = null;
 
   _massage(inbound) {
-    console.log("Data.massage",inbound); //PERMANENT
     this.title = inbound.title || this.title;
+    this.title = inbound.title;
 
     // Determine exact route for history.
     let route = this.route;
     for (var key in this.parameters) {
       route = route.replace(":"+key,this.parameters[key]);
     }
-    (new History()).mark(route,this.title).then();
+    (new History()).mark(route,{title:this.title,type:this.type}).then();
 
     this.massage(inbound); // custom massaging by derived class
   }
