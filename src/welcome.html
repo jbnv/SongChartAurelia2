@@ -65,7 +65,7 @@
 
         <div class="list-group">
           <a class="list-group-item" href="#/${item.route}" repeat.for="item of history.recents.slice(0,10)">
-            <i class="fa-fw fa fa-circle"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
+            <i class="fa-fw fa fa-${item.type || 'circle'}"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
           </a>
         </div>
 

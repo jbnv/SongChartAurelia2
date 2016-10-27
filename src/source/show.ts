@@ -5,7 +5,8 @@ export class Source extends Data {
   fetchRouteFn = (parameters) => 'sources/compiled/'+parameters.slug;
 
   title = '(Source)';
-  type = "movie";
+  type = "source";
+  subtype = "movie";
 
   songs = {};
   songListModel = {};
@@ -15,7 +16,7 @@ export class Source extends Data {
 
   massage(inbound) {
 
-    this.type = inbound.type;
+    this.subtype = inbound.type;
 
     this.songs = inbound.songs;
     this.songCount = Object.keys(inbound.songs).length;

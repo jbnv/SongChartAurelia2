@@ -5,6 +5,7 @@ export class Location extends Data {
   fetchRouteFn = (parameters) => 'geo/compiled/'+parameters.slug;
 
   title = '(Location)';
+  type = "location";
   parents = [];
   children = [];
   artists = [];
