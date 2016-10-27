@@ -1,0 +1,56 @@
+<template>
+  <require from="../resources/elements/artist-table"></require>
+
+  <section>
+    <h2>
+      <span class="title-artist-${filter}"></span>
+      <i class="fa fa-artist-${filter}"></i>
+      <span class="small">${subtitle}</span>
+    </h2>
+  </section>
+
+  <section>
+    <ul class="nav nav-pills">
+      <li role="presentation" class.bind="!filter ? 'active' : ''">
+        <a href="#/artists">All</a>
+      </li>
+      <li role="presentation" class.bind="filter === 'incomplete' ? 'active' : ''">
+        <a href="#/artists/incomplete"><i class="fa fa-exclamation-circle"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'active' ? 'active' : ''">
+        <a href="#/artists/active"><i class="fa fa-play"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-m' ? 'active' : ''">
+        <a href="#/artists/type:m"><i class="fa fa-artist-type-m"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-f' ? 'active' : ''">
+        <a href="#/artists/type:f"><i class="fa fa-artist-type-f"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-mm' ? 'active' : ''">
+        <a href="#/artists/type:mm"><i class="fa fa-artist-type-mm"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-ff' ? 'active' : ''">
+        <a href="#/artists/type:ff"><i class="fa fa-artist-type-ff"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-mf' ? 'active' : ''">
+        <a href="#/artists/type:mf"><i class="fa fa-artist-type-mf"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-fm' ? 'active' : ''">
+        <a href="#/artists/type:fm"><i class="fa fa-artist-type-fm"></i></a>
+      </li>
+      <li role="presentation" class.bind="filter === 'type-g' ? 'active' : ''">
+        <a href="#/artists/type:g">Groups</a>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <artist-table
+      path="artists/compiled"
+      show-only.bind="showOnly"
+      sort-slug.bind="sort"
+      subset-slug="top:${count}"
+    ></artist-table>
+  </section>
+
+</template>

@@ -1,0 +1,108 @@
+<template>
+
+  <require from="../value-converters/decimal"></require>
+  <require from="../value-converters/object-values"></require>
+
+  <table class="table table-hover">
+    <thead>
+
+      <tr>
+
+        <th show.bind="!columns.rank.hidden" class="${sortColumn === 'rank' ? 'active' : ''}">
+          <a click.trigger="sortByRank()">Rank</a>
+        </th>
+
+        <th show.bind="!columns.title.hidden" class="${sortColumn === 'title' ? 'active' : ''}">
+          <a click.trigger="sortByTitle()">Title</a>
+        </th>
+
+        <th show.bind="!columns.complete.hidden" style="text-align:center">
+          <i class="fa fa-fw fa-check"></i>
+        </th>
+
+        <th show.bind="!columns.type.hidden" style="text-align:center">
+          Type
+        </th>
+
+        <th show.bind="!columns.roles.hidden" style="text-align:center">
+          Roles
+        </th>
+
+        <th show.bind="!columns.songCount.hidden" class="${sortColumn === 'songCount' ? 'active' : ''}" colspan=2>
+          <a click.trigger="sortBySongCount()">Songs</a>
+        </th>
+
+        <th show.bind="!columns.score.hidden" class="${sortColumn === 'score' ? 'active' : ''}" style="text-align:right">
+          <a click.trigger="sortByScore()">Score</a>
+        </th>
+
+        <th show.bind="!columns.songAdjustedAverage.hidden" class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" colspan=2>
+          <a click.trigger="sortBySAA()">SAA</a>
+        </th>
+
+    	</tr>
+
+    </thead>
+    <tbody>
+
+      <tr repeat.for="artist of view">
+
+        <td show.bind="!columns.rank.hidden">${artist.rank}</td>
+
+        <td show.bind="!columns.title.hidden">
+          <a href="#/artist/${artist.instanceSlug}">${artist.title}</a>
+        </td>
+
+        <td show.bind="!columns.complete.hidden" style="text-align:center">
+          <i class="fa fa-fw fa-circle-thin" if.bind="!artist.complete && !artist.active"></i>
+          <i class="fa fa-fw fa-play" if.bind="artist.active"></i>
+          <span if.bind="artist.death">&dagger;</span>
+        </td>
+
+        <td show.bind="!columns.type.hidden" style="text-align:center">
+          <i class="fa fa-artist-type-${artist.type && artist.type.slug}"></i>
+        </td>
+
+        <td show.bind="!columns.roles.hidden" style="text-align:center">
+          <a href="#/role/${role.instanceSlug}" repeat.for="role of artist.roles | objectValues">
+            <i class="fa fa-artist-role-${role.instanceSlug}"></i>
+          </a>
+        </td>
+
+        <td show.bind="!columns.songCount.hidden" style="text-align:right">
+          <span if.bind="artist.songCount > 0">${artist.songCount || 0}</span>
+        </td>
+
+        <td show.bind="!columns.songCount.hidden">
+          <div class="progress" style="width:5em">
+            <div class="progress-bar progress-bar-info" role="progressbar"
+              aria-valuenow.bind="artist.songCount" aria-valuemin="0" aria-valuemax.bind="maxSongCount"
+              style="width: ${100*artist.songCount/maxSongCount}%;">
+            </div>
+          </div>
+        </td>
+
+        <td show.bind="!columns.score.hidden" style="text-align:right">
+          <span if.bind="artist.score > 0">${artist.score | decimal:2}</span></td>
+        </td>
+
+        <td show.bind="!columns.songAdjustedAverage.hidden" style="text-align:right">
+          <span if.bind="artist.score > 0">${artist.songAdjustedAverage | decimal:2}</span></td>
+        </td>
+
+        <td show.bind="!columns.songAdjustedAverage.hidden">
+          <div class="progress" style="width:5em">
+            <div class="progress-bar progress-bar-info" role="progressbar"
+              aria-valuenow.bind="artist.songAdjustedAverage" aria-valuemin="0" aria-valuemax.bind="maxSongAdjustedAverage"
+              style="width: ${100*artist.songAdjustedAverage/maxSongAdjustedAverage}%;">
+            </div>
+          </div>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</template>
