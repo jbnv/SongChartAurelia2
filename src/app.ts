@@ -36,8 +36,8 @@ export class App {
       { route: 'song/:slug', name: 'song', moduleId: 'song', title: 'Song', auth: true },
       { route: 'songs', name: 'songs', moduleId: 'songs', title: 'Songs', auth: true },
       { route: 'songs/:filter', name: 'songs', moduleId: 'songs', auth: true },
-      { route: 'source/:slug', name: 'source', moduleId: 'source', title: 'Source', auth: true },
-      { route: 'sources', name: 'sources', moduleId: 'sources', title: 'Sources', auth: true },
+      { route: 'source/:slug', name: 'source', moduleId: 'source/show', title: 'Source', auth: true },
+      { route: 'sources', name: 'sources', moduleId: 'source/list', title: 'Sources', auth: true },
       { route: 'year/:slug', name: 'year', moduleId: 'year', auth: true },
       { route: 'years', name: 'years', moduleId: 'years', auth: true }
     ]);

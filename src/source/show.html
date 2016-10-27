@@ -1,0 +1,22 @@
+<template>
+  <require from="../resources/elements/song-table"></require>
+
+  <section>
+    <h2>
+      ${title}
+      <i class="fa fa-film" if.bind="type == 'movie'"></i>
+      <i class="fa fa-tv" if.bind="type == 'tv'"></i>
+    </h2>
+  </section>
+
+  <section>
+    <h3>Songs <span class="badge">${songs.length}</span></h3>
+    <song-table
+      path="sources/compiled/${slug}/songs"
+      show-only.bind="showOnly"
+      sort-slug="score"
+      subset-slug="source:${slug}"
+    ></song-table>
+  </section>
+
+</template>

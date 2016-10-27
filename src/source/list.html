@@ -1,0 +1,40 @@
+<template>
+  <require from="../resources/value-converters/decimal"></require>
+
+  <section>
+    <h2>Sources <span class="badge">${content.length}</span></h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="${sortColumn === 'title' ? 'active' : ''}">
+            <a click.trigger="sortByTitle()">Title</a>
+          </th>
+          <th>Type</th>
+          <th class="${sortColumn === 'songCount' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySongCount()">Songs</a>
+          </th>
+          <th class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" style="text-align:right">
+            <a click.trigger="sortBySAA()">SAA</a>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="src of view">
+          <td>
+            <a href="#/source/${src.instanceSlug}">${src.title}</a>
+          </td>
+          <td style="text-align:center">
+            <i class="fa fa-film" if.bind="src.type == 'movie'"></i>
+            <i class="fa fa-tv" if.bind="src.type == 'tv'"></i>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="src.songCount > 0">${src.songCount || 0}</span></td>
+          </td>
+          <td style="text-align:right">
+            <span if.bind="src.songAdjustedAverage > 0">${src.songAdjustedAverage | decimal:2}</span></td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</template>
