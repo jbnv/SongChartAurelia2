@@ -2,13 +2,15 @@ import {ReactiveCollection} from "./firebase/collection"
 import {History} from '../resources/history';
 
 export class Data extends ReactiveCollection {
+
   title = "";
-  subtitle = "";
+  subtitle = "";  // A subtitle for filtered results.
+
   route = "";
   fetchRoute = "";
   fetchRouteFn = null;
   slug = "";
-  parameters = {};
+  parameters: any;
   navModel = null;
 
   _massage(inbound) {
