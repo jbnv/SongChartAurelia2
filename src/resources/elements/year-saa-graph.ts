@@ -11,7 +11,7 @@ export class YearSaaGraph extends ScaleGraph {
   transformFn = function(year) {
     return {
       "ordinal": year.slug,
-      "value": year.count,
+      "value": this.saa(year),
       "route": "year/"+year.slug,
       "tooltip": year.slug+": "+this.saa(year),
       "highlight": year.highlight,
@@ -19,4 +19,5 @@ export class YearSaaGraph extends ScaleGraph {
       "lagger": year.lagger
     };
   }
+
 }
