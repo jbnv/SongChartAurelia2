@@ -66,6 +66,7 @@ export class ReactiveCollection {
       subset = this.viewFilters.reduce((prev,fn) => prev.filter(fn), subset);
     }
     subset.sort(this.viewSortFn);
+    subset.forEach(function(value,index) { subset[index].__rank = index+1; });
     if (!this.viewSortOrder) subset = subset.reverse();
     if (this.viewCount) subset = subset.slice(0,this.viewCount);
     return subset;
