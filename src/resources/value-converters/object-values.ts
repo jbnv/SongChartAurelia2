@@ -3,7 +3,7 @@ export class ObjectValuesValueConverter {
     toView(obj) {
         if (Array.isArray(obj)) return obj;
         let temp = [];
-        if (/number|string|boolean/.test(obj)) {
+        if (/number|string|boolean/.test(typeof obj)) {
           temp.push(obj);
           return temp;
         }
