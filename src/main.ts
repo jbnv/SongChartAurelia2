@@ -15,7 +15,7 @@ import * as fbConfig from './resources/firebase-config';
 export function configure(aurelia: Aurelia) {
   aurelia.use
     .standardConfiguration()
-    .feature('resources');
+    .feature('resources') // install resources
     //.plugin('aurelia-animator-css');
 
   if (environment.debug) {
