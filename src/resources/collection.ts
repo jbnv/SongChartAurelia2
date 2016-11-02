@@ -5,10 +5,8 @@ export class Collection extends Data {
 
   sortColumn = "title";
 
-  maxSongCount = 0.00;
-  maxSongAdjustedAverage = 0.00;
-  maxArtistCount = 0.00;
-  maxArtistAdjustedAverage = 0.00;
+  maxes = {};
+  maxFields = [];
 
   sort(column,fn = null) {
 
@@ -69,18 +67,11 @@ export class Collection extends Data {
         item.artistCount = item.artists.length;
       }
 
-      if (item.songCount > this.maxSongCount) {
-        this.maxSongCount = item.songCount;
-      }
-      if (item.songAdjustedAverage > this.maxSongAdjustedAverage) {
-        this.maxSongAdjustedAverage = item.songAdjustedAverage;
-      }
-      if (item.ArtistCount > this.maxArtistCount) {
-        this.maxArtistCount = item.ArtistCount;
-      }
-      if (item.ArtistAdjustedAverage > this.maxArtistAdjustedAverage) {
-        this.maxArtistAdjustedAverage = item.ArtistAdjustedAverage;
-      }
+      this.maxFields.forEach(field => {
+        if (item[field] > (this.maxes[field] || 0)) {
+          this.maxes[field] = item[field];
+        }
+      });
     }
 
   }
