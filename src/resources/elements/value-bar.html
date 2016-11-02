@@ -1,0 +1,8 @@
+<template>
+  <div class="progress" style="width:${width}">
+    <div class="progress-bar progress-bar-info" role="progressbar"
+      aria-valuenow.bind="value" aria-valuemin="0" aria-valuemax.bind="max"
+      style="width: ${100*value/max}%;">
+    </div>
+  </div>
+</template>
