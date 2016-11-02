@@ -17,6 +17,8 @@ export class App {
       { route: ['', 'welcome'], name: 'welcome', moduleId: 'welcome', title: 'Welcome', auth: true },
       { route: 'search', name: 'search', moduleId: 'search', title: 'Search', auth: true },
       { route: 'artist/:slug', name: 'artist', moduleId: 'artist/show', title: 'Artist', auth: true },
+      { route: 'artist/:slug/collaborators', name: 'collaborators', moduleId: 'artist/collaborators', title: 'Artist Collaborators', auth: true },
+      { route: 'artist/:slug/songs', name: 'artist-songs', moduleId: 'artist/songs', title: 'Artist Songs', auth: true },
       { route: 'artists', name: 'artists', moduleId: 'artist/list', title: 'Artists', auth: true },
       { route: 'artists/:filter', name: 'artists', moduleId: 'artists', auth: true },
       { route: 'artist-type/:slug', name: 'artist-type', moduleId: 'artist-type', title: 'Artist Type', auth: true },

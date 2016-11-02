@@ -1,0 +1,18 @@
+<template>
+
+  <section>
+    <h2>
+      ${artistTitle} Collaborators
+      <span class="badge">${content.length}</span>
+    </h2>
+  </section>
+
+  <section>
+    <artist-table
+      path="artists/compiled/${slug}/collaborators"
+      show-only.bind="showOnly"
+      sort-slug.bind="sort"
+    ></artist-table>
+  </section>
+
+</template>

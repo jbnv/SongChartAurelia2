@@ -1,0 +1,18 @@
+<template>
+
+  <section>
+    <h2>
+      ${artistTitle} Songs
+      <span class="badge">${content.length}</span>
+    </h2>
+  </section>
+
+  <section>
+    <song-table
+      path="artists/compiled/${artistSlug}/songs"
+      show-only.bind="showOnly"
+      sort-slug="score"
+    ></song-table>
+  </section>
+
+</template>

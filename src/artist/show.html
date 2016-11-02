@@ -1,0 +1,172 @@
+<template>
+
+  <section>
+    <h2>
+      ${title}
+      <i class="fa fa-artist-${status}"></i>
+      <span class="small" show.bind="songAdjustedAverage > 0">${songAdjustedAverage} #${rank}</span>
+    </h2>
+  </section>
+
+  <section>
+    <messages content="messages"></messages>
+  </section>
+
+  <section>
+    <table class="table">
+
+      <tr>
+        <th>Demographics</th>
+        <td>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <b>Gender/Type</b>
+                <i class="fa fa-artist-type-${type.slug}"></i> ${type.title}
+                <b show.bind="birth">&nbsp; Birth</b>
+                <a href="#/date/${birth}">${birth}</a>
+                <b show.bind="death">&nbsp; Death</b>
+                <a href="#/date/${death}">${death}</a>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="origin">
+        <th>Origin</th>
+        <td>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="#/geo/${origin.slug}">${origin.title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${origin.rank}</div>
+              <div class="col-xs-5">
+                <rank-bar rank.bind="origin.__rank" count.bind="origin.__rankCount"></compose>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="roles | any">
+        <th>${genres | pluralCase:["Role","Roles"]}</th>
+        <td colspan=5>
+          <div class="container">
+            <div class="row" repeat.for="role of roles | objectValues">
+              <div class="col-xs-6">
+                <a href="#/role/${role.slug}">${role.title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${role.rank}</div>
+              <div class="col-xs-5">
+                <rank-bar rank.bind="role.__rank" count.bind="role.__rankCount"></compose>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="genres | any">
+        <th>${genres | pluralCase:["Genre","Genres"]}</th>
+        <td>
+          <div class="container">
+            <div class="row" repeat.for="genre of genres | objectValues">
+              <div class="col-xs-6">
+                <a href="#/genre/${genre.slug}">${genre.title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${genre.rank}</div>
+              <div class="col-xs-5">
+                <rank-bar rank.bind="genre.__rank" count.bind="genre.__rankCount"></compose>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="members | any">
+        <th>${members | pluralCase:["Member","Members"]}</th>
+        <td>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <span repeat.for="artist of members | objectValues">
+                  <a href="#/artist/${artist.slug}">${artist.title}</a>
+                  <span if.bind="!$last">|</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="xref | any">
+        <th>Related/Associated</th>
+        <td>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12">
+                <span repeat.for="artist of xref | objectValues">
+                  <a href="#/artist/${artist.instanceSlug}">${artist.title}</a>
+                  <span if.bind="!$last">|</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr show.bind="tags | any">
+        <th>${tags | pluralCase:["Tag/List","Tags/Lists"]}</th>
+        <td colspan=5>
+          <div class="container">
+            <div class="row" repeat.for="tag of tags | objectValues">
+              <div class="col-xs-6">
+                <a href="#/tag/${tag.slug}">${tag.title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${tag.rank}</div>
+              <div class="col-xs-5">
+                <rank-bar rank.bind="tag.__rank" count.bind="tag.__rankCount"></compose>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+  </section>
+
+  <section>
+    <compose view-model="../resources/elements/year-scales" model.bind="songs"></compose>
+  </section>
+
+  <section>
+    <h3>
+      Collaborators
+      <span class="badge">${collaboratorTableModel.artists | count}</span>
+      <a href="#/artist/${slug}/collaborators"><i class="fa fa-expand"></i></a>
+    </h3>
+    <artist-table
+      path="artists/compiled/${slug}/collaborators"
+      show-only.bind="collaboratorShowOnly"
+      sort-slug.bind="collaboratorSort"
+      take="5"
+    ></artist-table>
+  </section>
+
+  <section>
+    <h3>
+      Songs
+      <span class="badge">${songTableModel.songs | count}</span>
+      <a href="#/artist/${slug}/songs"><i class="fa fa-expand"></i></a>
+    </h3>
+    <song-table
+      path="artists/compiled/${slug}/songs"
+      show-only.bind="songShowOnly"
+      sort-slug.bind="songSort"
+      subset-slug="artist:${slug}"
+      take="5"
+    ></song-table>
+  </section>
+
+</template>
