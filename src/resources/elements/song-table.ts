@@ -10,6 +10,9 @@ export class SongTableCustomElement extends Collection {
   @bindable showOnly = [];
   @bindable sortSlug: string;
   @bindable subsetSlug: string;
+  @bindable take: number;
+
+  maxFields = ['score','peak','ascent-weeks','descent-weeks'];
 
   columns = new Columns({
     'rank': 'Rank',
@@ -52,12 +55,14 @@ export class SongTableCustomElement extends Collection {
     }
 
     this.items = data;
+    this.aggregate();
 
     if (this.showOnly) {
       Columns.prototype.showOnly.apply(this.columns,this.showOnly);
     }
 
     this.sort(this.sortSlug || 'score');
+    this.viewCount = this.take;
 
   }
 

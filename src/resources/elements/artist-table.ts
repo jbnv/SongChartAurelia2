@@ -9,8 +9,11 @@ export class ArtistTableCustomElement extends Collection {
   @bindable showOnly = [];
   @bindable sortSlug: string;
   @bindable subsetSlug: string;
+  @bindable take: number;
 
   _defaultCount = 100;
+
+  maxFields = ['songCount','score'];
 
   columns = new Columns({
     'rank': 'Rank',
@@ -44,7 +47,6 @@ export class ArtistTableCustomElement extends Collection {
       if (!this.columns.songAdjustedAverage.hidden && !artist.songAdjustedAverage) {
         artist.songAdjustedAverage = artist.score;
       }
-      if (!artist.rank) artist.rank = artist.__rank;
     }
 
     this.aggregate();
@@ -63,6 +65,13 @@ export class ArtistTableCustomElement extends Collection {
     }
 
     this.sort('songAdjustedAverage');
+    this.viewCount = this.take;
 
+  }
+
+  artistType(artist) {
+    if (!artist) return null;
+    if (typeof artist.type == "string") return artist.type;
+    return (artist.type || {}).slug;
   }
 }

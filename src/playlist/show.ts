@@ -21,7 +21,7 @@ export class Playlist extends Data {
     this.songs = inbound.songs;
     this.songCount = Object.keys(inbound.songs).length;
 
-    this.showOnly = inbound.columns || ['rank','title','artist','score','debutDate','duration','ascent','descent'];
+    this.showOnly = inbound.columns || ['rank','title','artist','score','debutDate','peakScore','ascent','descent'];
     this.sort = inbound.sort || "score";
 
   }

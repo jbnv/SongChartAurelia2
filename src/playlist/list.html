@@ -20,7 +20,7 @@
       <tbody>
         <tr repeat.for="playlist of view">
           <td>
-            <a href="#/playlist/${playlist.instanceSlug}">${playlist.title}</a>
+            <a href="#/playlist/${playlist.key}">${playlist.title}</a>
           </td>
           <td style="text-align:right">
             <span if.bind="playlist.songCount > 0">${playlist.songCount || 0}</span>
