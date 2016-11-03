@@ -9,6 +9,7 @@ export function configure(aurelia) {
     './value-converters/missing',
     './value-converters/object-values',
     './value-converters/plural-case',
+    './value-converters/title',
     './elements/song-table',
     './elements/artist-table',
     './elements/messages',
