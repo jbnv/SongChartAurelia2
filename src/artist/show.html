@@ -51,7 +51,7 @@
       </tr>
 
       <tr show.bind="roles | any">
-        <th>${genres | pluralCase:["Role","Roles"]}</th>
+        <th>${roles | pluralCase:["Role","Roles"]}</th>
         <td colspan=5>
           <div class="container">
             <div class="row" repeat.for="role of roles | objectValues">
