@@ -61,9 +61,9 @@
   <section if.bind="score > 0">
     <h3>
       Scores
-       <span class="small" if.bind="peak > 0">${peak}</span>
-       <span class="small" if.bind="ascentWeeks > 0">${ascentWeeks}</span>
-       <span class="small" if.bind="descentWeeks > 0">${descentWeeks}</span>
+       <span class="small" if.bind="peak > 0">${peak | decimal:3}</span>
+       <span class="small" if.bind="ascentWeeks > 0"><i class="fa fa-chevron-up"></i> ${ascentWeeks | decimal:2}</span>
+       <span class="small" if.bind="descentWeeks > 0"><i class="fa fa-chevron-down"></i> ${descentWeeks | decimal:2}</span>
     </h3>
   </section>
 
