@@ -1,4 +1,5 @@
 <template>
+  <require from="../resources/elements/ranked-detail"></require>
 
   <section>
     <h2>
@@ -12,131 +13,55 @@
     <messages content="messages"></messages>
   </section>
 
-  <section>
-    <table class="table">
+  <section show.bind="origin">
+    <h3>Demographics</h3>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <b show.bind="type.length == 1">Gender</b>
+          <b show.bind="type.length > 1">Type</b>
+          <i class="fa fa-artist-type-${type}"></i> ${type.title}
+          <b show.bind="birth">&nbsp; Birth</b>
+          <a href="#/date/${birth}">${birth}</a>
+          <b show.bind="death">&nbsp; Death</b>
+          <a href="#/date/${death}">${death}</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      <tr>
-        <th>Demographics</th>
-        <td>
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12">
-                <b>Gender/Type</b>
-                <i class="fa fa-artist-type-${type.slug}"></i> ${type.title}
-                <b show.bind="birth">&nbsp; Birth</b>
-                <a href="#/date/${birth}">${birth}</a>
-                <b show.bind="death">&nbsp; Death</b>
-                <a href="#/date/${death}">${death}</a>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+  <section show.bind="origin | any">
+    <h3>Origin</h3>
+    <ranked-detail type-slug="location" items.bind="origin" ranks.bind="ranks"></ranked-detail>
+  </section>
 
-      <tr show.bind="origin">
-        <th>Origin</th>
-        <td>
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-6">
-                <a href="#/geo/${origin.slug}">${origin.title}</a>
-              </div>
-              <div class="col-xs-1 text-right">${origin.rank}</div>
-              <div class="col-xs-5">
-                <rank-bar rank.bind="origin.rank" count.bind="origin.count"></rank-bar>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+  <section show.bind="roles | any">
+    <h3>${roles | pluralCase:["Role","Roles"]}</h3>
+    <ranked-detail type-slug="role" items.bind="roles" ranks.bind="ranks"></ranked-detail>
+  </section>
 
-      <tr show.bind="roles | any">
-        <th>${roles | pluralCase:["Role","Roles"]}</th>
-        <td colspan=5>
-          <div class="container">
-            <div class="row" repeat.for="role of roles | objectValues">
-              <div class="col-xs-6">
-                <a href="#/role/${role.slug}">${role.title}</a>
-              </div>
-              <div class="col-xs-1 text-right">${role.rank}</div>
-              <div class="col-xs-5">
-                <rank-bar rank.bind="role.rank" count.bind="role.count"></rank-bar>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+  <section show.bind="genres | any">
+    <h3>${genres | pluralCase:["Genre","Genres"]}</h3>
+    <ranked-detail type-slug="genre" items.bind="genres" ranks.bind="ranks"></ranked-detail>
+  </section>
 
-      <tr show.bind="genres | any">
-        <th>${genres | pluralCase:["Genre","Genres"]}</th>
-        <td>
-          <div class="container">
-            <div class="row" repeat.for="genre of genres | objectValues">
-              <div class="col-xs-6">
-                <a href="#/genre/${genre.slug}">${genre.title}</a>
-              </div>
-              <div class="col-xs-1 text-right">${genre.rank}</div>
-              <div class="col-xs-5">
-                <rank-bar rank.bind="genre.rank" count.bind="genre.count"></rank-bar>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+  <section show.bind="members | any">
+    <h3>${members | pluralCase:["Member","Members"]}</h3>
+    <ranked-detail type-slug="artist" items.bind="members"></ranked-detail>
+  </section>
 
-      <tr show.bind="members | any">
-        <th>${members | pluralCase:["Member","Members"]}</th>
-        <td>
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12">
-                <span repeat.for="artist of members | objectValues">
-                  <a href="#/artist/${artist.slug}">${artist.title}</a>
-                  <span if.bind="!$last">|</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
+  <section show.bind="xref | any">
+    <h3>Related/Associated</h3>
+    <ranked-detail type-slug="artist" items.bind="xref"></ranked-detail>
+  </section>
 
-      <tr show.bind="xref | any">
-        <th>Related/Associated</th>
-        <td>
-          <div class="container">
-            <div class="row">
-              <div class="col-xs-12">
-                <span repeat.for="artist of xref | objectValues">
-                  <a href="#/artist/${artist.instanceSlug}">${artist.title}</a>
-                  <span if.bind="!$last">|</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-
-      <tr show.bind="tags | any">
-        <th>${tags | pluralCase:["Tag/List","Tags/Lists"]}</th>
-        <td colspan=5>
-          <div class="container">
-            <div class="row" repeat.for="tag of tags | objectValues">
-              <div class="col-xs-6">
-                <a href="#/tag/${tag.slug}">${tag.title}</a>
-              </div>
-              <div class="col-xs-1 text-right">${tag.rank}</div>
-              <div class="col-xs-5">
-                <rank-bar rank.bind="tag.rank" count.bind="tag.count"></rank-bar>
-              </div>
-            </div>
-          </div>
-        </td>
-      </tr>
-
-    </table>
+  <section show.bind="tags | any">
+    <h3>${tags | pluralCase:["Tag/List","Tags/Lists"]}</h3>
+    <ranked-detail type-slug="tag" items.bind="tags" ranks.bind="ranks"></ranked-detail>
   </section>
 
   <section>
+    <h3>Histogram</h3>
     <compose view-model="../resources/elements/year-scales" model.bind="songs"></compose>
   </section>
 

@@ -12,7 +12,7 @@ export class Artist extends Data {
   genres = {};
   birth = "";
   death = "";
-  origin = "";
+  origin = {};
   songs = {};
   rank: number;
   score = 0.00;
@@ -37,6 +37,13 @@ export class Artist extends Data {
     this.status
       = inbound.complete ? "complete"
       : inbound.active ? "active" : "incomplete";
+    this.birth = inbound.birth;
+    this.death = inbound.death;
+
+    //TODO Make origin a hierarchical object.
+    this.origin = {};
+    if (inbound.origin) this.origin[inbound.origin.instanceSlug] = inbound.origin;
+
     this.genres = inbound.genres || {};
     this.members = inbound.members || {};
     this.xref = inbound.xref || {};
@@ -46,33 +53,6 @@ export class Artist extends Data {
 
     this.score = numeral(inbound.score || 0).format("0.00");
     this.songAdjustedAverage = numeral(inbound.songAdjustedAverage || 0).format("0.00");
-
-    // Pull out ranks and add them to their respective entities.
-    Object.keys(this.ranks || {}).forEach(key => {
-      let rank = this.ranks[key];
-      let keyParts = key.split(":");
-      let typeSlug = keyParts[0];
-      let instanceSlug = keyParts[1];
-      let entity = null;
-      switch (typeSlug) {
-        case "genre":
-          entity = this.genres[instanceSlug];
-          break;
-        case "role":
-          entity = this.roles[instanceSlug];
-          break;
-        case "origin":
-          entity = this.origin || {};
-          break;
-        case "tag":
-          entity = this.tags[instanceSlug];
-          break;
-      }
-      if (typeof entity == "object") {
-        entity.rank = rank.rank;
-        entity.count = rank.total;
-      }
-    });
 
   } // massage()
 }

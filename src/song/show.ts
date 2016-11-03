@@ -42,40 +42,9 @@ export class Song extends Data {
     this.sources = inbound.sources || {};
     this.tags = inbound.tags || {};
 
-    this.debutEra = inbound.debutEra || {};
+    console.log("[45]",this.ranks);
 
-    // Pull out ranks and add them to their respective entities.
-    Object.keys(this.ranks).forEach(key => {
-      let rank = this.ranks[key];
-      let keyParts = key.split(":");
-      let typeSlug = keyParts[0];
-      let instanceSlug = keyParts[1];
-      let entity = null;
-      switch (typeSlug) {
-        case "artist":
-          entity = this.artists[instanceSlug];
-          break;
-        case "genre":
-          entity = this.genres[instanceSlug];
-          break;
-        case "playlist":
-          entity = this.playlists[instanceSlug];
-          break;
-        case "source":
-          entity = this.sources[instanceSlug];
-          break;
-        case "decade":
-          entity = this.decade = {"instanceSlug":key};
-          break;
-        case "year":
-          entity = this.year = {"instanceSlug":key};
-          break;
-      }
-      if (entity && typeof entity == "object") {
-        entity.rank = rank.rank;
-        entity.count = rank.total;
-      }
-    });
+    this.debutEra = inbound.debutEra || {};
 
     this.scores = [];
     for (var i = 1; i < this.ascentWeeks + this.descentWeeks; i++) {
