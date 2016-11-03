@@ -2,7 +2,11 @@
   <require from="../resources/elements/ranked-detail"></require>
 
   <section>
-    <h2>${title} <span class="small" if.bind="score > 0">${score | decimal:2} #${rank}</span></h2>
+    <h2>
+      ${title}
+      <span class="small" show.bind="score > 0">${score | decimal:2} #${rank}</span>
+      <button class="btn-link" click.delegate="toggleEditMode()"><i class="fa fa-pencil"></i></button>
+    </h2>
   </section>
 
   <section>
@@ -61,9 +65,23 @@
   <section if.bind="score > 0">
     <h3>
       Scores
-       <span class="small" if.bind="peak > 0">${peak | decimal:3}</span>
-       <span class="small" if.bind="ascentWeeks > 0"><i class="fa fa-chevron-up"></i> ${ascentWeeks | decimal:2}</span>
-       <span class="small" if.bind="descentWeeks > 0"><i class="fa fa-chevron-down"></i> ${descentWeeks | decimal:2}</span>
+       <span class="small" show.bind="peak > 0">
+         ${peak | decimal:3}
+         <i class="fa fa-plus-square" show.bind="editMode"></i>
+         <i class="fa fa-minus-square" show.bind="editMode"></i>
+       </span>
+       <span class="small" show.bind="ascentWeeks > 0">
+         <i class="fa fa-chevron-up"></i>
+         ${ascentWeeks | decimal:2}
+         <i class="fa fa-plus-square" show.bind="editMode"></i>
+         <i class="fa fa-minus-square" show.bind="editMode"></i>
+       </span>
+       <span class="small" show.bind="descentWeeks > 0">
+         <i class="fa fa-chevron-down"></i>
+         ${descentWeeks | decimal:2}
+         <i class="fa fa-plus-square" show.bind="editMode"></i>
+         <i class="fa fa-minus-square" show.bind="editMode"></i>
+       </span>
     </h3>
   </section>
 

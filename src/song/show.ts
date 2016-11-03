@@ -5,6 +5,8 @@ export class Song extends Data {
 
   fetchRouteFn = (parameters) => 'songs/compiled/'+parameters.slug;
 
+  editMode = false;
+
   title = '(Song)';
   typeTitle = "NOT SET";
   artists = {};
@@ -25,6 +27,10 @@ export class Song extends Data {
   year: any;
 
   scores = [];
+
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+  }
 
   massage(inbound) {
 
