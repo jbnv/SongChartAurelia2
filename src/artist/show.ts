@@ -42,6 +42,7 @@ export class Artist extends Data {
     this.xref = inbound.xref || {};
     this.tags = inbound.tags || {};
     this.ranks = inbound.ranks || {};
+    this.songs = inbound.songs || {};
 
     this.score = numeral(inbound.score || 0).format("0.00");
     this.songAdjustedAverage = numeral(inbound.songAdjustedAverage || 0).format("0.00");
