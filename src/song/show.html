@@ -1,0 +1,120 @@
+<template>
+
+  <section>
+    <h2>${title} <span class="small" if.bind="score > 0">${score | decimal:2} #${rank}</span></h2>
+  </section>
+
+  <section>
+    <messages content="messages"></messages>
+  </section>
+
+  <section>
+    <table class="table">
+      <tr>
+        <th>Debut</th>
+        <td>
+          <div class="container">
+            <div class="row" show.bind="decade">
+              <div class="col-xs-3">${debutEra.title}</div>
+              <div class="col-xs-1 text-right">
+                <a href="#/decade/${debutEra.decade}s">${debutEra.decade}s</a>
+              </div>
+              <div class="col-xs-1 text-right">${decade.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="decade.rank" count.bind="decade.count"></rank-bar>
+              </div>
+            </div>
+            <div class="row" show.bind="year">
+              <div class="col-xs-3">&nbsp;</div>
+              <div class="col-xs-1 text-right">
+                <a href="#/year/${debutEra.year}">${debutEra.year}</a>
+              </div>
+              <div class="col-xs-1 text-right">${year.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="year.rank" count.bind="year.count"></rank-bar>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>${artists | pluralCase:["Artist","Artists"]}</th>
+        <td>
+          <div class="container">
+            <div class="row" repeat.for="artist of artists | objectValues">
+              <div class="col-xs-4">
+                <a href="#/artist/${artist.slug}">${artist | title}</a>
+                <span class="small text-muted" if.bind="artist.roleSlug !== true">${artist.roleSlug}</span>
+              </div>
+              <div class="col-xs-1 text-right">${artist.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="artist.rank" count.bind="artist.count"></rank-bar>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr show.bind="genres | any">
+        <th>${genres | pluralCase:["Genre","Genres"]}</th>
+        <td>
+          <div class="container">
+            <div class="row" repeat.for="genre of genres | objectValues">
+              <div class="col-xs-4">
+                <a href="#/genre/${genre.key}">${genre | title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${genre.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="genre.rank" count.bind="genre.count"></rank-bar>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr show.bind="sources | any">
+        <th>${sources | pluralCase:["Source","Sources"]}</th>
+        <td>
+          <div class="container">
+            <div class="row" repeat.for="source of sources | objectValues">
+              <div class="col-xs-4">
+                <a href="#/source/${source.key}">${source | title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${source.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="source.rank" count.bind="source.count"></rank-bar>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr show.bind="playlists | any">
+        <th>${playlists | pluralCase:["Playlist","Playlists"]}</th>
+        <td>
+          <div class="container">
+            <div class="row" repeat.for="playlist of playlists | objectValues">
+              <div class="col-xs-4">
+                <a href="#/playlist/${playlist.key}">${playlist | title}</a>
+              </div>
+              <div class="col-xs-1 text-right">${playlist.rank}</div>
+              <div class="col-xs-3">
+                <rank-bar rank.bind="playlist.rank" count.bind="playlist.count"></rank-bar>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section if.bind="score > 0">
+    <h3>Scores</h3>
+  </section>
+
+  <section if.bind="score > 0">
+    <div class="graph">
+      <div class="vertical-bar"
+          style="width: ${100/scores.length}%; height: ${100*score}%;"
+          repeat.for="score of scores"></div>
+    </div>
+  </section>
+
+</template>
