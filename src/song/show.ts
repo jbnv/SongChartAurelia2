@@ -16,6 +16,8 @@ export class Song extends Data {
 
   score: number;
   peak: number;
+  ascentWeeks: number;
+  descentWeeks: number;
   rank: number;
   status: string;
   debutEra = {};
@@ -28,8 +30,8 @@ export class Song extends Data {
 
     this.rank = inbound.__rank;
     this.peak = inbound.peak;
-    this["ascent-weeks"] = inbound["ascent-weeks"];
-    this["descent-weeks"] = inbound["descent-weeks"];
+    this.ascentWeeks = inbound["ascent-weeks"];
+    this.descentWeeks = inbound["descent-weeks"];
 
     this.score = (2/3) * inbound.peak * (inbound["ascent-weeks"]+inbound["descent-weeks"]);
 
@@ -76,12 +78,10 @@ export class Song extends Data {
     });
 
     this.scores = [];
-    let ascentWeeks = this["ascent-weeks"];
-    let descentWeeks = this["descent-weeks"];
-    for (var i = 1; i < ascentWeeks + descentWeeks; i++) {
-      let denominator = i < ascentWeeks ? ascentWeeks : descentWeeks;
+    for (var i = 1; i < this.ascentWeeks + this.descentWeeks; i++) {
+      let denominator = i < this.ascentWeeks ? this.ascentWeeks : this.descentWeeks;
       this.scores.push(
-        this.peak * (1-Math.pow((i-ascentWeeks)/denominator,2))
+        this.peak * (1-Math.pow((i-this.ascentWeeks)/denominator,2))
       );
     }
 

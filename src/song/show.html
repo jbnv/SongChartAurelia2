@@ -106,7 +106,12 @@
   </section>
 
   <section if.bind="score > 0">
-    <h3>Scores</h3>
+    <h3>
+      Scores
+       <span class="small" if.bind="peak > 0">${peak}</span>
+       <span class="small" if.bind="ascentWeeks > 0">${ascentWeeks}</span>
+       <span class="small" if.bind="descentWeeks > 0">${descentWeeks}</span>
+    </h3>
   </section>
 
   <section if.bind="score > 0">
