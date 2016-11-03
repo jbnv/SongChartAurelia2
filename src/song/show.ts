@@ -28,7 +28,7 @@ export class Song extends Data {
 
   massage(inbound) {
 
-    this.rank = inbound.__rank;
+    this.rank = ((inbound.ranks || {}).overall || {}).rank;
     this.peak = inbound.peak;
     this.ascentWeeks = inbound["ascent-weeks"];
     this.descentWeeks = inbound["descent-weeks"];
