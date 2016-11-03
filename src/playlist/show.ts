@@ -18,8 +18,8 @@ export class Playlist extends Data {
   massage(inbound) {
     this.description = inbound.description;
 
-    this.songs = inbound.songs;
-    this.songCount = Object.keys(inbound.songs).length;
+    this.songs = inbound.songs || {};
+    this.songCount = Object.keys(this.songs).length;
 
     this.showOnly = inbound.columns || ['rank','title','artist','score','debutDate','peakScore','ascent','descent'];
     this.sort = inbound.sort || "score";
