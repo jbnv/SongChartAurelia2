@@ -3,6 +3,7 @@ import {ReactiveCollection} from "./firebase/collection";
 export class History extends ReactiveCollection {
 
   recents = [];
+  recentsByType = {};
 
   constructor() {
     super();
@@ -35,7 +36,7 @@ export class History extends ReactiveCollection {
             route: route,
             title: obj.__title,
             timestamp: obj.__timestamp,
-            type: obj.__type,
+            type: obj.__type || null,
             data: obj.data
           });
         }
@@ -48,7 +49,18 @@ export class History extends ReactiveCollection {
 
       _processObject(null,this.items);
 
-      this.recents = recents.sort(function(a,b) { return b.timestamp - a.timestamp; });
+      function _timesort(a,b) { return b.timestamp - a.timestamp; };
+
+      this.recents = recents.sort(_timesort);
+
+      // Separate recents by type.
+      // No need to sort since already sorted by time.
+      this.recents.forEach(item => {
+        let typeSlug = item.type;
+        if (!typeSlug) return;
+        if (!this.recentsByType[typeSlug]) this.recentsByType[typeSlug] = [];
+        this.recentsByType[typeSlug].push(item);
+      });
 
     });
   }
