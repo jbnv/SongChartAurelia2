@@ -41,7 +41,7 @@
           <a click.trigger="sortByScore()">Score</a>
         </th>
 
-    		<th show.bind="!columns.projectedRank.hidden"></th>
+        <th show.bind="!columns.score.hidden"></th><!-- debut/ascending/descending -->
 
     		<th show.bind="!columns.projectedRank.hidden" style="text-align:right">
     			Projected Rank
@@ -59,8 +59,12 @@
           <a click.trigger="sortByAscent()">Ascent</a>
     		</th>
 
-        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" style="text-align:right"colspan=2>
+        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" style="text-align:right" colspan=2>
           <a click.trigger="sortByDescent()">Descent</a>
+    		</th>
+
+        <th style="text-align:center">
+          <i class="fa fa-caret-down"></i>
     		</th>
 
     	</tr>
@@ -136,12 +140,9 @@
         </td>
 
         <td show.bind="!columns.score.hidden" style="text-align:right"> <!-- TODO -->
-          <i class="fa fa-chevron-up" show.bind="false"></i>
-          <i class="fa fa-chevron-down" show.bind="false"></i>
-        </td>
-
-        <td show.bind="!columns.projectedRank.hidden">
           <i class="fa fa-fw fa-star text-primary" show.bind="song.isDebut"></i>
+          <i class="fa fa-fw fa-chevron-up" show.bind="false"></i>
+          <i class="fa fa-fw fa-chevron-down" show.bind="false"></i>
         </td>
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
@@ -170,6 +171,26 @@
 
         <td show.bind="!descent.ascent.hidden">
           <value-bar value.bind="song['descent-weeks']" max.bind="maxes['descent-weeks']" width="3em"></value-bar>
+        </td>
+
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a><i class="fa fa-fw fa-chevron-up"></i> Swap up</a></li>
+              <li><a><i class="fa fa-fw fa-chevron-down"></i> Swap down</a></li>
+              <li><a><i class="fa fa-fw fa-chevron-up"></i> Peak up</a></li>
+              <li><a><i class="fa fa-fw fa-chevron-down"></i> Peak down</a></li>
+              <li><a><i class="fa fa-fw fa-plus"></i>1 ascent week</a></li>
+              <li><a><i class="fa fa-fw fa-minus"></i>1 ascent week</a></li>
+              <li><a><i class="fa fa-fw fa-plus"></i>1 descent week</a></li>
+              <li><a><i class="fa fa-fw fa-minus"></i>1 descent week</a></li>
+              <li><a><i class="fa fa-fw"></i> Clear</a></li>
+              <li><a><i class="fa fa-fw"></i> Zero</a></li>
+            </ul>
+          </div>
         </td>
 
       </tr>
