@@ -2,7 +2,7 @@
   <require from="../resources/elements/song-table"></require>
 
   <section>
-    <h2>${title}</h2>
+    <h1>${title}</h1>
     <p>${description}</p>
   </section>
 
@@ -14,7 +14,7 @@
     <h3>Songs <span class="badge">${songCount}</span></h3>
     <song-table
       path="playlists/compiled/${slug}/songs"
-      show-only.bind="showOnly" 
+      show-only.bind="showOnly"
       sort-slug.bind="sort"
       subset-slug="playlist:${slug}"
     ></song-table>

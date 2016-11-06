@@ -2,11 +2,11 @@
   <require from="../resources/elements/ranked-detail"></require>
 
   <section>
-    <h2>
+    <h1>
       ${title}
       <span class="small" show.bind="score > 0">${score | decimal:2} #${rank}</span>
       <button class="btn-link" click.delegate="toggleEditMode()"><i class="fa fa-pencil"></i></button>
-    </h2>
+    </h1>
   </section>
 
   <section>
