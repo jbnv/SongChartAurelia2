@@ -42,23 +42,35 @@
     </div>
   </section>
 
-  <section show.bind="artists | any">
-    <h3>${artists | pluralCase:["Artist","Artists"]}</h3>
+  <section show.bind="(editMode || artists) | any">
+    <h3>
+      ${artists | pluralCase:["Artist","Artists"]}
+      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+    </h3>
     <ranked-detail type-slug="artist" items.bind="artists" ranks.bind="ranks"></ranked-detail>
   </section>
 
-  <section show.bind="genres | any">
-    <h3>${genres | pluralCase:["Genre","Genres"]}</h3>
+  <section show.bind="(editMode || genres) | any">
+    <h3>
+      ${genres | pluralCase:["Genre","Genres"]}
+      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+    </h3>
     <ranked-detail type-slug="genre" items.bind="genres" ranks.bind="ranks"></ranked-detail>
   </section>
 
-  <section show.bind="sources | any">
-    <h3>${sources | pluralCase:["Source","Sources"]}</h3>
+  <section show.bind="(editMode || sources) | any">
+    <h3>
+      ${sources | pluralCase:["Source","Sources"]}
+      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+    </h3>
     <ranked-detail type-slug="source" items.bind="sources" ranks.bind="ranks"></ranked-detail>
   </section>
 
-  <section show.bind="playlists | any">
-    <h3>${playlists | pluralCase:["Playlist","Playlists"]}</h3>
+  <section show.bind="(editMode || playlists) | any">
+    <h3>
+      ${playlists | pluralCase:["Playlist","Playlists"]}
+      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+    </h3>
     <ranked-detail type-slug="playlist" items.bind="playlists" ranks.bind="ranks"></ranked-detail>
   </section>
 
