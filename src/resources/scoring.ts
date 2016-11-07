@@ -83,6 +83,15 @@ export function descentFn(coefficient) {
   });
 };
 
+export const swapDurations = _transform(function(song) {
+  if (!song["ascent-weeks"]) song["ascent-weeks"] = 1.0;
+  if (!song["descent-weeks"]) song["descent-weeks"] = 1.0;
+  let temp = song["ascent-weeks"];
+  song["ascent-weeks"] = song["descent-weeks"];
+  song["descent-weeks"] = temp;
+  return song;
+});
+
 export function clear(slug) {
   _write(slug,{"peak": null, "ascent-weeks":null, "descent-weeks":null});
 };
