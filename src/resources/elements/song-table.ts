@@ -75,8 +75,6 @@ export class SongTableCustomElement extends Collection {
     return outbound;
   }
 
-  bendUp = Scoring.bendUp;
-  bendDown = Scoring.bendDown;
-  ascentUp = Scoring.ascentUp;
-  descentUp = Scoring.descentUp;
+  scoring = Scoring;
+
 }

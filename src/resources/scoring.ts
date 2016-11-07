@@ -51,40 +51,33 @@ function _write(slug,song) {
 
 }
 
-function bendFn(coefficient) {
+function _transform(fn) {
   return function(songSlug) {
-    let query = _queryRaw(songSlug);
-    query.once("value").then(snapshot => {
-      let song = snapshot.val();
-      song.peak = _bend(coefficient)(song.peak || "0.5");
-      _write(songSlug,song);
-    });
-  }
-}
-
-function ascentIncreaseFn(weeks) {
-  return function(songSlug) {
-    console.log("ascentIncreaseFn",songSlug); //TEMP
     _queryRaw(songSlug).once("value").then(snapshot => {
-      let song = snapshot.val();
-      song["ascent-weeks"] = song["ascent-weeks"] + weeks;
-      _write(songSlug,song);
+      _write(songSlug,fn(snapshot.val()));
     });
   }
 }
 
-function descentIncreaseFn(weeks) {
-  return function(songSlug) {
-    console.log("descentIncreaseFn",songSlug); //TEMP
-    _queryRaw(songSlug).once("value").then(snapshot => {
-      let song = snapshot.val();
-      song["descent-weeks"] = song["descent-weeks"] + weeks;
-      _write(songSlug,song);
-    });
-  }
-}
+export function peakFn(coefficient) {
+  return _transform(function(song) {
+    song.peak = _bend(coefficient)(song.peak || "0.5");
+    return song;
+  });
+};
 
-export const bendUp = bendFn(1);
-export const bendDown = bendFn(-1);
-export const ascentUp = ascentIncreaseFn(1);
-export const descentUp = descentIncreaseFn(1);
+export function ascentFn(coefficient) {
+  return _transform(function(song) {
+    if (!song["ascent-weeks"]) song["ascent-weeks"] = 1.0;
+    song["ascent-weeks"] *= coefficient;
+    return song;
+  });
+};
+
+export function descentFn(coefficient) {
+  return _transform(function(song) {
+    if (!song["descent-weeks"]) song["descent-weeks"] = 1.0;
+    song["descent-weeks"] *= coefficient;
+    return song;
+  });
+};
