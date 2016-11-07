@@ -1,5 +1,6 @@
 import {Data} from '../resources/data';
 import * as numeral from 'numeral';
+import * as Scoring from '../resources/scoring';
 
 export class Song extends Data {
 
@@ -27,6 +28,8 @@ export class Song extends Data {
   year: any;
 
   scores = [];
+
+  scoring = Scoring;
 
   toggleEditMode() {
     this.editMode = !this.editMode;

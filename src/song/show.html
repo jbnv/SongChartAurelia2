@@ -67,22 +67,28 @@
       Scores
        <span class="small" show.bind="peak > 0">
          ${peak | decimal:3}
-         <i class="fa fa-plus-square" show.bind="editMode"></i>
-         <i class="fa fa-minus-square" show.bind="editMode"></i>
        </span>
        <span class="small" show.bind="ascentWeeks > 0">
          <i class="fa fa-chevron-up"></i>
          ${ascentWeeks | decimal:2}
-         <i class="fa fa-plus-square" show.bind="editMode"></i>
-         <i class="fa fa-minus-square" show.bind="editMode"></i>
        </span>
        <span class="small" show.bind="descentWeeks > 0">
          <i class="fa fa-chevron-down"></i>
          ${descentWeeks | decimal:2}
-         <i class="fa fa-plus-square" show.bind="editMode"></i>
-         <i class="fa fa-minus-square" show.bind="editMode"></i>
        </span>
     </h3>
+    <ul class="nav nav-pills" show.bind="editMode">
+      <li role="presentation"><a click.delegate="scoring.swapDurations(slug)"><i class="fa fa-exchange"></i> Swap ascent/descent</a></li>
+      <li role="presentation"><a click.delegate="scoring.normalizeDurations(slug)"><i class="fa fa-exchange"></i> Normalize ascent/descent</a></li>
+      <li role="presentation"><a click.delegate="scoring.peakFn(1)(slug)"><i class="fa fa-chevron-up"></i> Peak up</a></li>
+      <li role="presentation"><a click.delegate="scoring.peakFn(-1)(slug)"><i class="fa fa-chevron-down"></i> Peak down</a></li>
+      <li role="presentation"><a click.delegate="scoring.ascentFn(1.5)(slug)"><i class="fa fa-chevron-up"></i> Ascent up</a></li>
+      <li role="presentation"><a click.delegate="scoring.ascentFn(2/3)(slug)"><i class="fa fa-chevron-down"></i> Ascent down</a></li>
+      <li role="presentation"><a click.delegate="scoring.descentFn(1.5)(slug)"><i class="fa fa-chevron-up"></i> Descent up</a></li>
+      <li role="presentation"><a click.delegate="scoring.descentFn(2/3)(slug)"><i class="fa fa-chevron-down"></i> Descent down</a></li>
+      <li role="presentation"><a click.delegate="scoring.clear(slug)">Clear</a></li>
+      <li role="presentation"><a click.delegate="scoring.zero(slug)">Zero</a></li>
+    </ul>
   </section>
 
   <section if.bind="score > 0">
