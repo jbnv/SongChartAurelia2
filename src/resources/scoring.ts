@@ -92,6 +92,16 @@ export const swapDurations = _transform(function(song) {
   return song;
 });
 
+export const normalizeDurations = _transform(function(song) {
+  if (!song["ascent-weeks"]) song["ascent-weeks"] = 1.0;
+  if (!song["descent-weeks"]) song["descent-weeks"] = 1.0;
+  let weeks = song["ascent-weeks"] + song["descent-weeks"];
+  let coefficient = song.peak * (1-song.peak);
+  song["ascent-weeks"] = weeks * coefficient;
+  song["descent-weeks"] = weeks * (1-coefficient);
+  return song;
+});
+
 export function clear(slug) {
   _write(slug,{"peak": null, "ascent-weeks":null, "descent-weeks":null});
 };
