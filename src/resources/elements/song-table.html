@@ -183,9 +183,9 @@
               <li><a><i class="fa fa-fw fa-chevron-down"></i> Swap down</a></li>
               <li><a click.delegate="bendUp(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Peak up</a></li>
               <li><a click.delegate="bendDown(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Peak down</a></li>
-              <li><a><i class="fa fa-fw fa-plus"></i>1 ascent week</a></li>
+              <li><a click.delegate="ascentUp(song.key)"><i class="fa fa-fw fa-plus"></i>1 ascent week</a></li>
               <li><a><i class="fa fa-fw fa-minus"></i>1 ascent week</a></li>
-              <li><a><i class="fa fa-fw fa-plus"></i>1 descent week</a></li>
+              <li><a click.delegate="descentUp(song.key)"><i class="fa fa-fw fa-plus"></i>1 descent week</a></li>
               <li><a><i class="fa fa-fw fa-minus"></i>1 descent week</a></li>
               <li><a><i class="fa fa-fw"></i> Clear</a></li>
               <li><a><i class="fa fa-fw"></i> Zero</a></li>

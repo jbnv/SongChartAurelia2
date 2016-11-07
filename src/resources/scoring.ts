@@ -62,5 +62,29 @@ function bendFn(coefficient) {
   }
 }
 
+function ascentIncreaseFn(weeks) {
+  return function(songSlug) {
+    console.log("ascentIncreaseFn",songSlug); //TEMP
+    _queryRaw(songSlug).once("value").then(snapshot => {
+      let song = snapshot.val();
+      song["ascent-weeks"] = song["ascent-weeks"] + weeks;
+      _write(songSlug,song);
+    });
+  }
+}
+
+function descentIncreaseFn(weeks) {
+  return function(songSlug) {
+    console.log("descentIncreaseFn",songSlug); //TEMP
+    _queryRaw(songSlug).once("value").then(snapshot => {
+      let song = snapshot.val();
+      song["descent-weeks"] = song["descent-weeks"] + weeks;
+      _write(songSlug,song);
+    });
+  }
+}
+
 export const bendUp = bendFn(1);
 export const bendDown = bendFn(-1);
+export const ascentUp = ascentIncreaseFn(1);
+export const descentUp = descentIncreaseFn(1);
