@@ -2,6 +2,7 @@ import {bindable} from 'aurelia-framework';
 
 import {Columns} from '../columns';
 import {Collection} from '../collection';
+import * as Scoring from '../scoring';
 import * as gregoria from 'gregoria';
 
 export class SongTableCustomElement extends Collection {
@@ -74,4 +75,6 @@ export class SongTableCustomElement extends Collection {
     return outbound;
   }
 
+  bendUp = Scoring.bendUp;
+  bendDown = Scoring.bendDown;
 }
