@@ -2,6 +2,7 @@ import 'firebase';
 import {Configuration} from './firebase/index';
 
 function _score():any {
+  if (!peak) return null;
 
   var peak = arguments[0] || 0,
       ascentWeeks = arguments[1] || 0,
@@ -80,4 +81,12 @@ export function descentFn(coefficient) {
     song["descent-weeks"] *= coefficient;
     return song;
   });
+};
+
+export function clear(slug) {
+  _write(slug,{"peak": null, "ascent-weeks":null, "descent-weeks":null});
+};
+
+export function zero(slug) {
+  _write(slug, {"peak": 0.001, "ascent-weeks":0.001, "descent-weeks":0.001});
 };

@@ -187,8 +187,8 @@
               <li><a click.delegate="scoring.ascentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Ascent down</a></li>
               <li><a click.delegate="scoring.descentFn(1.5)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Descent up</a></li>
               <li><a click.delegate="scoring.descentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Descent down</a></li>
-              <li><a><i class="fa fa-fw"></i> Clear</a></li>
-              <li><a><i class="fa fa-fw"></i> Zero</a></li>
+              <li><a click.delegate="scoring.clear(song.key)"><i class="fa fa-fw"></i> Clear</a></li>
+              <li><a click.delegate="scoring.zero(song.key)"><i class="fa fa-fw"></i> Zero</a></li>
             </ul>
           </div>
         </td>
