@@ -24,6 +24,9 @@
             <li><a href="#/songs/create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.song.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 
@@ -37,6 +40,9 @@
             <li><a href="#/artists/create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.artist.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 
@@ -60,6 +66,9 @@
             <li><a href="#/playlists/Create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.playlist.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 
@@ -72,6 +81,9 @@
             <li><a href="#/genres/Create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.genre.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 
@@ -84,6 +96,9 @@
             <li><a href="#/sources/Create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.source.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 
@@ -96,6 +111,9 @@
             <li><a href="#/locations/Create">New</a></li>
             <li role="separator" class="divider"></li>
             <li role="presentation" class="dropdown-header">Recents</li>
+            <li repeat.for="item of history.recentsByType.location.slice(0,5)">
+              <a href="#/${item.route}">${item.title}</a>
+            </li>
           </ul>
         </li>
 

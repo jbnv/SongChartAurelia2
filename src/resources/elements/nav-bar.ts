@@ -1,5 +1,6 @@
 import {inject,bindable} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import {History} from '../history';
 
 @inject(Router)
 export class NavBar {
@@ -12,6 +13,8 @@ export class NavBar {
     "artists","genres","locations",
     "playlists","songs","sources"
   ];
+
+  history: History;
 
   // get currentFragment() {
   //   let history = this.router.history;
@@ -46,6 +49,6 @@ export class NavBar {
 
   constructor(router) {
     this.router = router;
+    this.history = new History();
   }
-
 }
