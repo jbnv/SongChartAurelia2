@@ -35,6 +35,7 @@ export class App {
       { route: 'month/:slug', name: 'month', moduleId: 'month', auth: true },
       { route: 'playlist/:slug', name: 'playlist', moduleId: 'playlist/show', title: 'Playlist', auth: true },
       { route: 'playlists', name: 'playlists', moduleId: 'playlist/list', title: 'Playlists', auth: true },
+      { route: 'playlists/create', name: 'playlist-create', moduleId: 'playlist/create', title: 'Create Playlist', auth: true },
       { route: 'song/:slug', name: 'song', moduleId: 'song/show', title: 'Song', auth: true },
       { route: 'songs', name: 'songs', moduleId: 'song/list', title: 'Songs', auth: true },
       { route: 'songs/:filter', name: 'songs', moduleId: 'song/list', auth: true },
