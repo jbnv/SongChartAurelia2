@@ -6,6 +6,7 @@ export class Artist extends Data {
   fetchRouteFn = (parameters) => 'artists/compiled/'+parameters.slug;
 
   title = '(Artist)';
+  type = "artist";
   complete = false;
   active = false;
   typeTitle = "NOT SET";
