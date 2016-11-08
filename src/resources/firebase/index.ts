@@ -57,9 +57,7 @@ export class FirebaseEntityModule extends FirebaseModule {
   editTitle = "";
   saveRoute = "";
 
-  setEntityClass(c) {
-    this.itemClass = c;
-  }
+  entityClass() { return null; } // derived class must implement this
 
   // setCollectionClass(c) {
   //   this.collectionClass = c;
@@ -71,14 +69,14 @@ export class FirebaseEntityModule extends FirebaseModule {
 
   refresh() {
     if (!this.parameters.id) {
-      this.item = new this.itemClass();
+      this.item = new (this.entityClass())();
       this.item.ownerId = this.user.uid;
       this.title = this.addTitle;
       return;
     }
     this.title = this.editTitle;
     let item = this.collection.getByKey(this.parameters.id);
-    this.item = new this.itemClass();
+    this.item = new (this.entityClass())();
     this.item.properties.forEach((key) => {
       this.item[key] = item[key];
     });
