@@ -2,11 +2,12 @@ import 'firebase';
 import {Configuration} from './firebase/index';
 
 function _score():any {
-  if (!peak) return null;
 
   var peak = arguments[0] || 0,
       ascentWeeks = arguments[1] || 0,
       descentWeeks = arguments[2] || 0;
+
+  if (!peak) return null;
 
   if (typeof arguments[0] == "object") {
     peak = arguments[0].peak || 0;
