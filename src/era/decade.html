@@ -1,0 +1,46 @@
+<template>
+
+    <require from="../resources/value-converters/decimal"></require>
+    <require from="../resources/elements/scale-graph"></require>
+    <require from="../resources/elements/page-nav"></require>
+
+    <section>
+      <h1>
+        ${title}
+        <span class="small">${score | decimal:2}<span>
+      </h1>
+    </section>
+
+  <section>
+    <page-nav previous.bind="previous" next.bind="next" pages.bind="pages"></compose>
+  </section>
+
+  <section>
+    <h3>Counts by Year</h3>
+  </section>
+
+  <section>
+    <scale-graph model.bind="countScales"></scale-graph>
+  </section>
+
+  <section>
+    <h3>Scores by Year</h3>
+  </section>
+
+  <section>
+    <scale-graph model.bind="aaScales"></scale-graph>
+  </section>
+
+  <section>
+    <h3>Songs <span class="badge">${count}</span></h3>
+  </section>
+
+  <section>
+    <song-table
+      path="songs/by-decade/${slug}/songs"
+      show-only="['rank','title','artist','score','debutDate']"
+      sort-slug="score"
+    ></song-table>
+  </section>
+
+</template>
