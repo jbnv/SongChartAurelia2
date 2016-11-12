@@ -22,6 +22,10 @@
             <a click.trigger="sortByScore()">Score</a>
           </th>
 
+          <th show.bind="!columns.topsong.hidden" class="${sortColumn === 'topsong' ? 'active' : ''}">
+            Top Song
+          </th>
+
       	</tr>
 
       </thead>
@@ -52,6 +56,10 @@
               width="10em"
               context.bind="decade.leader ? 'success' : decade.lagger ? 'danger' : ''"
             ></value-bar>
+          </td>
+
+          <td>
+            <a href="#/song/${decade.topsong}">${decade.topsongTitle}</a>
           </td>
 
         </tr>

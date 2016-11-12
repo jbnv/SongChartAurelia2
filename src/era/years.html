@@ -1,7 +1,7 @@
 <template>
 
   <section>
-    <h1>Decades</h1>
+    <h1>Years</h1>
   </section>
 
   <section>
@@ -20,6 +20,10 @@
 
           <th show.bind="!columns.score.hidden" class="${sortColumn === 'score' ? 'active' : ''}" colspan=2>
             <a click.trigger="sortByScore()">Score</a>
+          </th>
+
+          <th show.bind="!columns.topsong.hidden" class="${sortColumn === 'topsong' ? 'active' : ''}">
+            Top Song
           </th>
 
       	</tr>
@@ -52,6 +56,10 @@
               width="10em"
               context.bind="year.leader ? 'success' : year.lagger ? 'danger' : ''"
             ></value-bar>
+          </td>
+
+          <td>
+            <a href="#/song/${year.topsong}">${year.topsongTitle}</a>
           </td>
 
         </tr>

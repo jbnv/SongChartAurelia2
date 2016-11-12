@@ -3,7 +3,7 @@ import {Collection} from '../resources/collection';
 
 export class Decades extends Collection {
 
-  fetchRouteFn = (parameters) => 'summary/decades'; // returns array of songs
+  fetchRouteFn = (parameters) => 'decades'; // returns array of songs
 
   decades = {};
 
@@ -16,7 +16,18 @@ export class Decades extends Collection {
   });
 
   massage() {
+
+    // Get titles of top songs.
+    this.view.forEach(decade => {
+      decade.topsongTitle = `[${decade.topsong}]`;
+      let query = firebase.database().ref("songs/raw").child(decade.topsong);
+      query.once("value", (snapshot) => {
+        if (snapshot.val()) decade.topsongTitle = snapshot.val().title;
+      })
+    })
+
     this.aggregate();
+    this.sort("key");
   }
 
 }
