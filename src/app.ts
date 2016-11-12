@@ -23,8 +23,8 @@ export class App {
       { route: 'artists/:filter', name: 'artists', moduleId: 'artists', auth: true },
       { route: 'artist-type/:slug', name: 'artist-type', moduleId: 'artist-type', title: 'Artist Type', auth: true },
       { route: 'artist-types', name: 'artist-types', moduleId: 'artist-types', title: 'Artists Types', auth: true },
-      { route: 'decade/:slug', name: 'decade', moduleId: 'decade', auth: true },
-      { route: 'decades', name: 'decades', moduleId: 'decades', auth: true },
+      { route: 'decade/:slug', name: 'decade', moduleId: 'era/decade', auth: true },
+      { route: 'decades', name: 'decades', moduleId: 'era/decades', auth: true },
       { route: 'eras', name: 'eras', moduleId: 'eras', auth: true },
       { route: 'genre/:slug', name: 'genre-artists', moduleId: 'genre/show', title: 'Genre', auth: true },
       { route: 'genre/:slug/artists', name: 'genre-artists', moduleId: 'genre-artists', title: 'Genre Artists', auth: true },
@@ -41,8 +41,8 @@ export class App {
       { route: 'songs/:filter', name: 'songs', moduleId: 'song/list', auth: true },
       { route: 'source/:slug', name: 'source', moduleId: 'source/show', title: 'Source', auth: true },
       { route: 'sources', name: 'sources', moduleId: 'source/list', title: 'Sources', auth: true },
-      { route: 'year/:slug', name: 'year', moduleId: 'year', auth: true },
-      { route: 'years', name: 'years', moduleId: 'years', auth: true }
+      { route: 'year/:slug', name: 'year', moduleId: 'era/year', auth: true },
+      { route: 'years', name: 'years', moduleId: 'era/years', auth: true }
     ]);
 
     this.router = router;
