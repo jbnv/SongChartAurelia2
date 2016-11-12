@@ -2,7 +2,7 @@
 
   <div class="graph">
       <div
-        title.bind="item.tooltip"
+        title.bind="item.tooltip || item.title+': '+item.value"
         class="vertical-bar ${item.leader ? 'leader' : null} ${item.lagger ? 'lagger' : null}"
         style="width: ${100/items.length}%; height: ${100*item.scale}%"
         repeat.for="item of items">
