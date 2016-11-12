@@ -1,0 +1,65 @@
+<template>
+
+  <section>
+    <h1>Decades</h1>
+  </section>
+
+  <section>
+    <table class="table table-hover">
+      <thead>
+
+        <tr>
+
+          <th show.bind="!columns.title.hidden" class="${sortColumn === 'title' ? 'active' : ''}">
+            <a click.trigger="sortByTitle()">Decade</a>
+          </th>
+
+          <th show.bind="!columns.count.hidden" class="${sortColumn === 'count' ? 'active' : ''}" colspan=2>
+            <a click.trigger="sortBySongCount()">Songs</a>
+          </th>
+
+          <th show.bind="!columns.score.hidden" class="${sortColumn === 'score' ? 'active' : ''}" colspan=2>
+            <a click.trigger="sortByScore()">Score</a>
+          </th>
+
+      	</tr>
+
+      </thead>
+      <tbody>
+
+        <tr repeat.for="decade of view">
+
+          <td show.bind="!columns.title.hidden">
+            <a href="#/decade/${decade.key}">${decade.key}</a>
+          </td>
+
+          <td show.bind="!columns.count.hidden" style="text-align:right">
+            ${decade.count}
+          </td>
+
+          <td>
+            <value-bar value.bind="decade.count" max.bind="maxes.count" width="10em"></value-bar>
+          </td>
+
+          <td show.bind="!columns.score.hidden" style="text-align:right">
+            <span if.bind="decade.score > 0">${decade.score | decimal:2}</span></td>
+          </td>
+
+          <td>
+            <value-bar
+              value.bind="decade.score"
+              max.bind="maxes.score"
+              width="10em"
+              context.bind="decade.leader ? 'success' : decade.lagger ? 'danger' : ''"
+            ></value-bar>
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+</template>
