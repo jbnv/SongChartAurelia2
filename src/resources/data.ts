@@ -23,7 +23,7 @@ export class Data extends ReactiveCollection {
     for (var key in this.parameters) {
       route = route.replace(":"+key,this.parameters[key]);
     }
-    (new History()).mark(route,{title:this.title,type:this.type}).then();
+    (new History()).mark(route,{title:this.title || this.slug,type:this.type}).then();
 
     this.massage(inbound); // custom massaging by derived class
   }
