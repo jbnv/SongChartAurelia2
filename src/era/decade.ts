@@ -39,20 +39,29 @@ export class Decade extends Data {
 
     this.pages = this.years.map(function(y) { return { title: y, route: "year/"+y };})
 
-    // this.countScales = [];
-    // this.aaScales = [];
-    // this.years.forEach(year => {
-    //   this.countScales.push({
-    //     title: year.title,
-    //     scale: year.songCountScale,
-    //     route: "year/"+year.slug
-    //   });
-    //   this.aaScales.push({
-    //     title: year.title,
-    //     scale: year.songAdjustedAverageScale,
-    //     route: "year/"+year.slug
-    //   });
-    // });
+    // Get years.
+    firebase.database().ref("years").once("value", (snapshot) => {
+      let years = snapshot.val();
+
+      this.countScales = [];
+      this.aaScales = [];
+
+      this.years.forEach(yearSlug => {
+        let year = years[yearSlug];
+        this.countScales.push({
+          title: yearSlug,
+          value: year.count,
+          route: "year/"+yearSlug
+        });
+        this.aaScales.push({
+          title: yearSlug,
+          value: Math.floor(year.score*100)/100,
+          route: "year/"+yearSlug
+        });
+      });
+
+    })
+
 
   }
 

@@ -1,7 +1,6 @@
 <template>
 
     <require from="../resources/value-converters/decimal"></require>
-    <require from="../resources/elements/scale-graph"></require>
     <require from="../resources/elements/page-nav"></require>
 
     <section>
@@ -20,7 +19,7 @@
   </section>
 
   <section>
-    <scale-graph model.bind="countScales"></scale-graph>
+    <compose view-model="../resources/elements/scale-graph" model.bind="countScales"></compose>
   </section>
 
   <section>
@@ -28,7 +27,7 @@
   </section>
 
   <section>
-    <scale-graph model.bind="aaScales"></scale-graph>
+    <compose view-model="../resources/elements/scale-graph" model.bind="aaScales"></compose>
   </section>
 
   <section>
@@ -38,7 +37,7 @@
   <section>
     <song-table
       path="songs/by-decade/${slug}/songs"
-      show-only="['rank','title','artist','score','debutDate']"
+      show-only.bind="['rank','title','artist','score','debutDate']"
       sort-slug="score"
     ></song-table>
   </section>
