@@ -42,13 +42,15 @@ export class YearScales {
 
     let decades = {};
     let years = {};
+    let nextYear = new Date().getFullYear() + 1;
+    let nextDecade = (Math.floor(nextYear/10)+1)*10;
 
-    for (let decade = 1950; decade <= 2010; decade += 10) {
+    for (let decade = 1950; decade <= nextDecade; decade += 10) {
       let title = (""+decade)+"s"
       decades[decade] = {title:title, count:0, score:0};
     }
 
-    for (let year = 1950; year <= 2017; year++) {
+    for (let year = 1950; year <= nextYear; year++) {
       let title = (""+year).substr(2,1)+" "+(""+year).substr(3,1);
       years[year] = {title:title, count:0, score:0};
     }
