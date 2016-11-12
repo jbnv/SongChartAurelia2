@@ -235,3 +235,9 @@ div.au-stagger {
 .fa-score:before { content:"\f005" } /* star */
 
 .fa-album:before { content:"\f10c" } /* circle-o */
+
+.fa-decade:before { content:"\f073" } /* calendar */
+
+.fa-year:before { content:"\f073" } /* calendar*/
+
+.fa-month:before { content:"\f073" } /* calendar */
