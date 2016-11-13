@@ -1,5 +1,6 @@
 import {Collection} from './resources/collection';
 import {History} from './resources/history';
+import * as Hasher from "hashids";
 
 export class Search extends Collection {
 
@@ -20,7 +21,9 @@ export class Search extends Collection {
         if (filterFn(item)) this.items[itemSlug] = item;
       }
     });
-    (new History()).mark("search",{title:parameters.slug,type:"search"}).then(); //INCOMPLETE
+    let hasher = new Hasher(parameters.slug);
+    let hash = hasher.encode(1);
+    (new History()).mark(`search/${hash}`,{title:parameters.slug,type:"search"}).then();
   }
 
 }

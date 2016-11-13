@@ -139,6 +139,11 @@
             "main": "index"
           },
           {
+            "name": "hashids",
+            "path": "../node_modules/hashids/dist",
+            "main": "hashids"
+          },
+          {
             "name": "nprogress",
             "path": "../node_modules/nprogress",
             "main":"nprogress"

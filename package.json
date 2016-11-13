@@ -39,6 +39,7 @@
     "firehash": "^1.1.0",
     "font-awesome": "^4.6.3",
     "gregoria": "^1.0.0",
+    "hashids": "^1.1.1",
     "jquery": "^2.2.4",
     "moment": "^2.15.0",
     "nprogress": "^0.2.0",
