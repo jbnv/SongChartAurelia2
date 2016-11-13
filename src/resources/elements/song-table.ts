@@ -42,17 +42,21 @@ export class SongTableCustomElement extends Collection {
   massage(data) {
 
     if (!data) {
-      throw "No data given.";
+      this.items = {};
     }
 
     // Make sure that each song has good data.
     for (let songSlug in data) {
       if (/^\_\_/.test(songSlug)) { delete data[songSlug]; continue; }
-      if (!data[songSlug]) data[songSlug] = {};
-      if (/boolean|number|string/.test(typeof data[songSlug])) data[songSlug] = { title: data[songSlug] }; // This should never happen!
-      let song = data[songSlug] || {};
-      if (!song.artists) song.artists = {};
-      if (!song.debutEra) song.debutEra = new gregoria(song.debut);
+      this.makeQuery(`songs/compiled/${songSlug}`, song => {
+        let oldSong = data[songSlug]; // data preserved from original load
+        data[songSlug] = song || {};
+        if (/boolean|number|string/.test(typeof song))
+          data[songSlug] = { title: song }; // This should never happen!
+        if (!song.artists) data[songSlug].artists = {};
+        if (!song.debutEra) data[songSlug].debutEra = new gregoria(song.debut);
+        data[songSlug].role = oldSong.role;
+      })
     }
 
     this.items = data;

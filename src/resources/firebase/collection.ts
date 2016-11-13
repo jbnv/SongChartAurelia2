@@ -48,6 +48,15 @@ export class ReactiveCollection {
     this._listenToQuery(this._query,onValue);
   }
 
+  makeQuery(pathString,onValue) {
+    if (!pathString) return; // This should never happen!
+    let query = firebase.database().ref(pathString);
+    query.on('value', (snapshot) => {
+      onValue(snapshot.val());
+    });
+    return query;
+  }
+
   // view(): Returns items as a filtered and sorted array.
   get view() {
     if (!this.items) return [];
