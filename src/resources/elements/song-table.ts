@@ -24,6 +24,7 @@ export class SongTableCustomElement extends Collection {
     'score': 'Score',
     'genre': 'Genre',
     'source': 'Source',
+    'motion': 'Motion',
     'projectedRank': "Projected Rank",
     'debutDate': "Debut Date",
     'debutScore': "Debut Score",
@@ -49,13 +50,19 @@ export class SongTableCustomElement extends Collection {
     for (let songSlug in data) {
       if (/^\_\_/.test(songSlug)) { delete data[songSlug]; continue; }
       this.makeQuery(`songs/compiled/${songSlug}`, song => {
-        let oldSong = data[songSlug]; // data preserved from original load
+        if (!song) song = {}; // This should never happen!
+        let oldSong = data[songSlug] || {}; // data preserved from original load
         data[songSlug] = song || {};
         if (/boolean|number|string/.test(typeof song))
           data[songSlug] = { title: song }; // This should never happen!
+
         if (!song.artists) data[songSlug].artists = {};
         if (!song.debutEra) data[songSlug].debutEra = new gregoria(song.debut);
-        data[songSlug].role = oldSong.role;
+        if (typeof oldSong === "number") data[songSlug].score = oldSong;
+        if (typeof oldSong === "object") {
+          data[songSlug].role = oldSong.role;
+          data[songSlug].score = oldSong.score;
+        }
       })
     }
 

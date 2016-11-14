@@ -41,7 +41,7 @@ export class Year extends Data {
     this.next.title = this.next.slug;
 
     this.pages = Object.keys(this.monthNames).map(y => {
-      title: this.monthNames[y], route: `month/${this.slug}-${y}`
+      return { title: this.monthNames[y], route: `month/${this.slug}-${y}` };
     });
 
     // Get months.
@@ -53,17 +53,23 @@ export class Year extends Data {
 
       this.months.forEach(monthSlug => {
         let month = months[monthSlug];
+        let ordinal = monthSlug.substr(5,2);
         this.countScales.push({
-          title: monthSlug,
+          ordinal: parseInt(ordinal),
+          title: this.monthNames[ordinal],
           value: month.count,
           route: "month/"+monthSlug
         });
         this.aaScales.push({
-          title: monthSlug,
+          ordinal: parseInt(ordinal),
+          title: this.monthNames[ordinal],
           value: Math.floor(month.score*100)/100,
           route: "month/"+monthSlug
         });
       });
+
+      this.countScales.sort((a,b) => a.ordinal - b.ordinal);
+      this.aaScales.sort((a,b) => a.ordinal - b.ordinal);
 
     })
 

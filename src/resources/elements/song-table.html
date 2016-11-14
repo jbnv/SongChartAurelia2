@@ -6,7 +6,7 @@
       <tr>
 
         <th show.bind="!columns.rank.hidden" class="${sortColumn === 'rank' ? 'active' : ''}">
-          <a click.trigger="sortByRank()">Rank</a>
+          <a click.trigger="sortByRank()"><i class="fa fa-hashtag"></i></a>
         </th>
 
         <th show.bind="!columns.overallRank.hidden" class="${sortColumn === 'rank' ? 'active' : ''}">
@@ -41,26 +41,18 @@
           <a click.trigger="sortByScore()">Score</a>
         </th>
 
-        <th show.bind="!columns.score.hidden"></th><!-- debut/ascending/descending -->
+        <th show.bind="!columns.motion.hidden"></th><!-- debut/ascending/descending -->
 
-    		<th show.bind="!columns.projectedRank.hidden" style="text-align:right">
-    			Projected Rank
+    		<th show.bind="!columns.peakScore.hidden"  class="${sortColumn === 'peak' ? 'active' : ''}" colspan=2>
+    			<a click.trigger="sortByPeak()">Peak</A> <i class="fa fa-peak"></i>
     		</th>
 
-    		<th show.bind="!columns.peakScore.hidden" style="text-align:right" colspan=2>
-    			Peak
+        <th show.bind="!columns.ascent.hidden" class="${sortColumn === 'ascent' ? 'active' : ''}" colspan=2>
+          <a click.trigger="sortByAscent()">Ascent <i class="fa fa-ascent"></i></a>
     		</th>
 
-        <th show.bind="!columns.duration.hidden" class="${sortColumn === 'duration' ? 'active' : ''}" style="text-align:right">
-          <a click.trigger="sortByDuration()">M</a>
-    		</th>
-
-        <th show.bind="!columns.ascent.hidden" class="${sortColumn === 'ascent' ? 'active' : ''}" style="text-align:right" colspan=2>
-          <a click.trigger="sortByAscent()">Ascent</a>
-    		</th>
-
-        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" style="text-align:right" colspan=2>
-          <a click.trigger="sortByDescent()">Descent</a>
+        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" colspan=2>
+          <a click.trigger="sortByDescent()">Descent <i class="fa fa-descent"></i></a>
     		</th>
 
         <th style="text-align:center">
@@ -139,10 +131,10 @@
           <value-bar value.bind="song.score" max.bind="maxes.score"></value-bar>
         </td>
 
-        <td show.bind="!columns.score.hidden" style="text-align:right"> <!-- TODO -->
+        <td show.bind="!columns.motion.hidden" style="text-align:right">
           <i class="fa fa-fw fa-star text-primary" show.bind="song.isDebut"></i>
-          <i class="fa fa-fw fa-chevron-up" show.bind="false"></i>
-          <i class="fa fa-fw fa-chevron-down" show.bind="false"></i>
+          <i class="fa fa-fw fa-long-arrow-up" show.bind="song.isAscending"></i>
+          <i class="fa fa-fw fa-long-arrow-down" show.bind="song.isDescending"></i>
         </td>
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
@@ -151,10 +143,6 @@
 
         <td show.bind="!columns.peakScore.hidden">
           <value-bar value.bind="song.peak" max.bind="1" width="3em"></value-bar>
-        </td>
-
-        <td show.bind="!columns.duration.hidden" style="text-align:right">
-          <span show.bind="!columns.projectedRank.hidden">${song.monthIndex+1} / </span>${song.duration}
         </td>
 
         <td show.bind="!columns.ascent.hidden" style="text-align:right">
@@ -169,7 +157,7 @@
           <span>${song["descent-weeks"] | decimal:2}</span>
         </td>
 
-        <td show.bind="!descent.ascent.hidden">
+        <td show.bind="!descent.descent.hidden">
           <value-bar value.bind="song['descent-weeks']" max.bind="maxes['descent-weeks']" width="3em"></value-bar>
         </td>
 
