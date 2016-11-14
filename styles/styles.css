@@ -218,6 +218,8 @@ div.au-stagger {
   background-color: #aeaeae;
 }
 
+/* Symbol modifiers. */
+
 /* Custom symbols. */
 
 .fa-artist:before { content:"\f007" } /* user */
@@ -241,3 +243,27 @@ div.au-stagger {
 .fa-year:before { content:"\f073" } /* calendar*/
 
 .fa-month:before { content:"\f073" } /* calendar */
+
+.fa-peak {
+  width: 0.5em;
+  text-align: center;
+  border-top: (2em / 14) solid black;
+}
+
+.fa-peak:before { content:"\f176" } /* long-arrow-up */
+
+.fa-ascent {
+  display: inline-block;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.fa-ascent:before { content:"\f176" } /* long-arrow-up */
+
+.fa-descent { 
+  display: inline-block;
+  -webkit-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+.fa-descent:before { content:"\f176" } /* long-arrow-up */
