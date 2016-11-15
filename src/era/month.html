@@ -1,0 +1,30 @@
+<template>
+
+    <require from="../resources/value-converters/decimal"></require>
+    <require from="../resources/elements/page-nav"></require>
+
+    <section>
+      <h1>
+        ${title}
+        <span class="small">${score | decimal:2}<span>
+      </h1>
+    </section>
+
+  <section>
+    <page-nav previous.bind="previous" next.bind="next" pages.bind="pages"></compose>
+  </section>
+
+  <section>
+    <h3>Songs <span class="badge">${count}</span></h3>
+  </section>
+
+  <section>
+    <song-table
+      path="months/${slug}/songs"
+      show-only.bind="['rank','title','artist','score','debutDate','peakScore','ascent','descent']"
+      sort-slug="score"
+      take="100"
+    ></song-table>
+  </section>
+
+</template>

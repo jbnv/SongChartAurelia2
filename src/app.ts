@@ -32,7 +32,7 @@ export class App {
       { route: 'genres', name: 'genres', moduleId: 'genre/list', title: 'Genres', auth: true },
       { route: 'location/:slug', name: 'location', moduleId: 'location/show', title: 'Location', auth: true },
       { route: 'locations', name: 'locations', moduleId: 'location/list', title: 'Locations', auth: true },
-      { route: 'month/:slug', name: 'month', moduleId: 'month', auth: true },
+      { route: 'month/:slug', name: 'month', moduleId: 'era/month', auth: true },
       { route: 'playlist/:slug', name: 'playlist', moduleId: 'playlist/show', title: 'Playlist', auth: true },
       { route: 'playlists', name: 'playlists', moduleId: 'playlist/list', title: 'Playlists', auth: true },
       { route: 'playlists/create', name: 'playlist-create', moduleId: 'playlist/create', title: 'Create Playlist', auth: true },
