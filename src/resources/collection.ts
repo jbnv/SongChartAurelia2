@@ -57,7 +57,7 @@ export class Collection extends Data {
   aggregate() {
 
     for (var slug in this.items) {
-      let item = this.items[slug];
+      let item = this.items[slug] || {};
 
       if (item.songs && item.songs.length > 0) {
         item.songCount = item.songs.length;
