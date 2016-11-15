@@ -9,23 +9,27 @@ export class Month extends Data {
 
   score: number;
   count: number;
+  startDate: string;
+  endDate: string;
 
   previous = {slug: null, route: null, title: null};
   next = {slug: null, route: null, title: null};
   pages = [];
 
   massage(inbound) {
-    console.log("[20]",inbound);
-    this.title = this.slug;
+    this.title = moment(this.slug).format("MMMM YYYY");
     this.count = inbound.count;
     this.score = inbound.score;
 
-    let previousMonth = moment(this.slug+'-01').add(-1,'month');
+    this.startDate = this.slug+"-01";
+    this.endDate = moment(this.startDate).endOf('month').format("YYYY-MM-DD");
+
+    let previousMonth = moment(this.startDate).add(-1,'month');
     this.previous.slug = previousMonth.format("YYYY-MM");
     this.previous.route = `month/${this.previous.slug}`;
     this.previous.title = previousMonth.format("MMMM YYYY");
 
-    let nextMonth = moment(this.slug+'-01').add(1,'month');
+    let nextMonth = moment(this.startDate).add(1,'month');
     this.next.slug = nextMonth.format("YYYY-MM");
     this.next.route = `month/${this.next.slug}`;
     this.next.title = nextMonth.format("MMMM YYYY");
