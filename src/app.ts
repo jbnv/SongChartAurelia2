@@ -23,6 +23,7 @@ export class App {
       { route: 'artists/:filter', name: 'artists', moduleId: 'artists', auth: true },
       { route: 'artist-type/:slug', name: 'artist-type', moduleId: 'artist-type', title: 'Artist Type', auth: true },
       { route: 'artist-types', name: 'artist-types', moduleId: 'artist-types', title: 'Artists Types', auth: true },
+      { route: 'day/:slug', name: 'day', moduleId: 'era/day', auth: true },
       { route: 'decade/:slug', name: 'decade', moduleId: 'era/decade', auth: true },
       { route: 'decades', name: 'decades', moduleId: 'era/decades', auth: true },
       { route: 'eras', name: 'eras', moduleId: 'eras', auth: true },
