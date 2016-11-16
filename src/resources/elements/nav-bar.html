@@ -46,7 +46,6 @@
           </ul>
         </li>
 
-
         <li class="dropdown ${router.history.fragment == '/decades' || router.history.fragment.startsWith('/decade/') || router.history.fragment == '/years' || router.history.fragment.startsWith('/year/') || router.history.fragment == '/months' || router.history.fragment.startsWith('/month/') ? 'active' : ''}">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-calendar"></i> Eras
@@ -129,16 +128,18 @@
 
       </ul>
 
-      <form class="navbar-form navbar-right" role="search">
-       <div class="form-group">
-         <input type="text" class="form-control" placeholder="Search" value.bind="searchTerm">
-       </div>
-       <button click.trigger="search()" type="submit" class="btn btn-default"><i class.bind="searchButtonClass()"></i></button>
-      </form>
-
       <ul class="nav navbar-nav navbar-right">
         <li class="loader" if.bind="router.isNavigating">
           <i class="fa fa-spinner fa-spin fa-2x"></i>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i></a>
+          <ul class="dropdown-menu" style="padding:12px;">
+            <form class="form-inline" role="search">
+              <input type="text" class="form-control pull-left" placeholder="Search" value.bind="searchTerm">
+              <button click.trigger="search()" type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i></button>
+            </form>
+            </ul>
         </li>
       </ul>
     </div>
