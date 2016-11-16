@@ -4,12 +4,9 @@ import * as Hasher from "hashids";
 
 export class Search extends Collection {
 
-  activate(parameters,routeConfig) {
-    this.title = parameters.slug;
-    super.activate(parameters,routeConfig);
-
-    let expression = new RegExp(parameters.slug,"gi");
-    let filterFn = item => expression.test(item.title);
+  _activate(expression) {
+    let re = new RegExp(expression,"gi");
+    let filterFn = item => re.test(item.title);
     this.sort("score");
 
     let query = firebase.database().ref("search/entities");
@@ -21,9 +18,25 @@ export class Search extends Collection {
         if (filterFn(item)) this.items[itemSlug] = item;
       }
     });
-    let hasher = new Hasher(parameters.slug);
+    let hasher = new Hasher(expression);
     let hash = hasher.encode(1);
-    (new History()).mark(`search/${hash}`,{title:parameters.slug,type:"search"}).then();
+    (new History()).mark(`search/${hash}`,{title:expression,type:"search"}).then();
+  }
+
+  activate(parameters,routeConfig) {
+    if (parameters.slug) {
+      let query = firebase.database().ref("history/search").child(parameters.slug);
+      query.once('value', (snapshot) => {
+        let entry = snapshot.val();
+        this.title = entry.title;
+        super.activate(parameters,routeConfig);
+        this._activate(entry.title);
+      });
+      return;
+    }
+    this.title = parameters.term;
+    super.activate(parameters,routeConfig);
+    this._activate(parameters.term);
   }
 
 }

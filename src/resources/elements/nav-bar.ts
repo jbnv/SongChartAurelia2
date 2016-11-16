@@ -43,7 +43,7 @@ export class NavBar {
       // currentRoute.name = username;
       // this.router.navigateToRoute('userprofile');
     } else {
-      this.router.navigateToRoute('search',{slug:this.searchTerm});
+      this.router.navigateToRoute('search/new',{term:this.searchTerm});
     }
   }
 

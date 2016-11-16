@@ -15,7 +15,8 @@ export class App {
     config.map([
       { route: ['account/signin'], name: 'accountSignin', moduleId: 'account/signin', title: 'Sign In' },
       { route: ['', 'welcome'], name: 'welcome', moduleId: 'welcome', title: 'Welcome', auth: true },
-      { route: 'search', name: 'search', moduleId: 'search', title: 'Search', auth: true },
+      { route: 'search', name: 'search/new', moduleId: 'search', title: 'Search', auth: true },
+      { route: 'search/:slug', name: 'search/previous', moduleId: 'search', title: 'Saved Search', auth: true },
       { route: 'artist/:slug', name: 'artist', moduleId: 'artist/show', title: 'Artist', auth: true },
       { route: 'artist/:slug/collaborators', name: 'collaborators', moduleId: 'artist/collaborators', title: 'Artist Collaborators', auth: true },
       { route: 'artist/:slug/songs', name: 'artist-songs', moduleId: 'artist/songs', title: 'Artist Songs', auth: true },
