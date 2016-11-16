@@ -1,11 +1,14 @@
+import {EventAggregator} from 'aurelia-event-aggregator'; // jspm install aurelia-event-aggregator
 import {inject,bindable} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 import {History} from '../history';
 
 @inject(Router)
+@inject(EventAggregator)
 export class NavBar {
 
   @bindable router = null;
+  eventAggregator: any;
 
   searchTerm = "";
 
@@ -47,8 +50,13 @@ export class NavBar {
     }
   }
 
-  constructor(router) {
+  reload() {
+    this.eventAggregator.publish('reload');
+  }
+
+  constructor(router,eventAggregator) {
     this.router = router;
+    this.eventAggregator = eventAggregator;
     this.history = new History();
   }
 }
