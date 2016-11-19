@@ -12,6 +12,7 @@ export class SongTableCustomElement extends Collection {
   @bindable sortSlug: string;
   @bindable subsetSlug: string;
   @bindable take: number;
+  @bindable options = {};
 
   maxFields = ['score','peak','ascent-weeks','descent-weeks'];
 

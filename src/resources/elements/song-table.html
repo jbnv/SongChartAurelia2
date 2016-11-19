@@ -43,16 +43,37 @@
 
         <th show.bind="!columns.motion.hidden"></th><!-- debut/ascending/descending -->
 
-    		<th show.bind="!columns.peakScore.hidden"  class="${sortColumn === 'peak' ? 'active' : ''}" colspan=2>
-    			<a click.trigger="sortByPeak()">Peak</A> <i class="fa fa-peak"></i>
+    		<th
+          show.bind="!columns.peakScore.hidden"
+          class="${sortColumn === 'peak' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+    			<a click.trigger="sortByPeak()">
+            <span show.bind="options.showStatBars">Peak</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-peak"></i></span>
+          </a>
     		</th>
 
-        <th show.bind="!columns.ascent.hidden" class="${sortColumn === 'ascent' ? 'active' : ''}" colspan=2>
-          <a click.trigger="sortByAscent()">Ascent <i class="fa fa-ascent"></i></a>
+        <th
+          show.bind="!columns.ascent.hidden"
+          class="${sortColumn === 'ascent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByAscent()">
+            <span show.bind="options.showStatBars">Ascent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-ascent"></i></span>
+          </a>
     		</th>
 
-        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" colspan=2>
-          <a click.trigger="sortByDescent()">Descent <i class="fa fa-descent"></i></a>
+        <th
+          show.bind="!columns.descent.hidden"
+          class="${sortColumn === 'descent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByDescent()">
+            <span show.bind="options.showStatBars">Descent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-descent"></i></span>
+          </a>
     		</th>
 
         <th style="text-align:center">
@@ -141,7 +162,7 @@
           <span>${song.peak | decimal:3}</span>
         </td>
 
-        <td show.bind="!columns.peakScore.hidden">
+        <td show.bind="!columns.peakScore.hidden && options.showStatBars">
           <value-bar value.bind="song.peak" max.bind="1" width="3em"></value-bar>
         </td>
 
@@ -149,7 +170,7 @@
           <span>${song["ascent-weeks"] | decimal:2}</span>
         </td>
 
-        <td show.bind="!columns.ascent.hidden">
+        <td show.bind="!columns.ascent.hidden && options.showStatBars">
           <value-bar value.bind="song['ascent-weeks']" max.bind="maxes['ascent-weeks']" width="3em"></value-bar>
         </td>
 
@@ -157,7 +178,7 @@
           <span>${song["descent-weeks"] | decimal:2}</span>
         </td>
 
-        <td show.bind="!descent.descent.hidden">
+        <td show.bind="!descent.descent.hidden && options.showStatBars">
           <value-bar value.bind="song['descent-weeks']" max.bind="maxes['descent-weeks']" width="3em"></value-bar>
         </td>
 
