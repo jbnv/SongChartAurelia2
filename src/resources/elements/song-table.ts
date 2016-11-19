@@ -63,6 +63,7 @@ export class SongTableCustomElement extends Collection {
         if (typeof oldSong === "object") {
           data[songSlug].role = oldSong.role;
           data[songSlug].score = oldSong.score;
+          data[songSlug].isPartial = oldSong.isPartial;
           data[songSlug].isDebut = oldSong.isDebut;
           data[songSlug].isAscending = !oldSong.isDebut && oldSong.isAscending;
           data[songSlug].isDescending = oldSong.isDescending;

@@ -153,6 +153,7 @@
         </td>
 
         <td show.bind="!columns.motion.hidden" style="text-align:right">
+          <i class="fa fa-fw fa-hourglass-half" show.bind="song.isPartial"></i>
           <i class="fa fa-fw fa-star" show.bind="song.isDebut"></i>
           <i class="fa fa-fw fa-long-arrow-up" show.bind="song.isAscending"></i>
           <i class="fa fa-fw fa-long-arrow-down" show.bind="song.isDescending"></i>
