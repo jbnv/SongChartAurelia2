@@ -10,6 +10,7 @@ export class ObjectValuesValueConverter {
         }
         for (let key in obj) {
           let value = obj[key];
+          if (typeof value === "object") value.__key = key;
           if (options.kvp) value = {__key: key, __value:obj[key]};
           temp.push(value);
         }
