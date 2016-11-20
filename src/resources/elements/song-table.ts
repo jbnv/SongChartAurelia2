@@ -84,14 +84,6 @@ export class SongTableCustomElement extends Collection {
 
   }
 
-  titleArtists(artists) {
-    let outbound = [];
-    for (let artistSlug in artists) {
-      if (artists[artistSlug].roleSlug === true) outbound.push(artists[artistSlug]);
-    }
-    return outbound;
-  }
-
   scoring = Scoring;
 
 }

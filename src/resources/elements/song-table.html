@@ -100,9 +100,11 @@
         </td>
 
         <td show.bind="!columns.artist.hidden">
-          <span repeat.for="artist of titleArtists(song.artists)">
-            <a href="#/artist/${artist.slug}">${artist.title}</a>
-            <br>
+          <span repeat.for="artist of song.artists | objectValues">
+            <span if.bind="artist.roleSlug === true">
+              <a href="#/artist/${artist.__key}">${artist.title}</a>
+              <br>
+            </span>
           </span>
         </td>
 
