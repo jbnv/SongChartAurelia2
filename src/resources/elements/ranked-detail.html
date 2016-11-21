@@ -1,12 +1,15 @@
 <template>
 
   <div class="container">
-    <div class="row" repeat.for="item of items | objectValues:{kvp:true}">
+    <div class="row" show.bind="editable">
+
+    </div>
+    <div class="row" repeat.for="item of (editable ? allItems : items) | objectValues:{kvp:true}">
       <div class="col-xs-6">
         <a href="#/${typeSlug}/${item.__key}">${item.__value | title}</a>
       </div>
       <div class="col-xs-1 text-right" if.bind="ranks">${rankItem(item).rank}</div>
-      <div class="col-xs-5" if.bind="ranks">
+      <div class="col-xs-5" if.bind="ranks && (!editable || rankItem(item))">
         <rank-bar rank.bind="rankItem(item).rank" count.bind="rankItem(item).total"></rank-bar>
       </div>
     </div>
