@@ -13,6 +13,8 @@ export class ObjectValuesValueConverter {
           if (options.kvp) value = {__key: key, __value:obj[key]};
           temp.push(value);
         }
+        if (options.sortFn) temp = temp.sort(options.sortFn);
+        if (options.take) return temp.slice(0,options.take);
         return temp;
     }
 }
