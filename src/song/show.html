@@ -45,7 +45,7 @@
   <section show.bind="(editMode || artists) | any">
     <h3>
       ${artists | pluralCase:["Artist","Artists"]}
-      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+      <button class="btn-link" show.bind="editMode" data-toggle="modal" data-target="#artist-select"><i class="fa fa-plus"></i></button>
     </h3>
     <ranked-detail type-slug="artist" items.bind="artists" ranks.bind="ranks"></ranked-detail>
   </section>
@@ -53,7 +53,7 @@
   <section show.bind="(editMode || genres) | any">
     <h3>
       ${genres | pluralCase:["Genre","Genres"]}
-      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+      <button class="btn-link" show.bind="editMode" data-toggle="modal" data-target="#genre-select"><i class="fa fa-plus"></i></button>
     </h3>
     <ranked-detail type-slug="genre" items.bind="genres" ranks.bind="ranks"></ranked-detail>
   </section>
@@ -61,7 +61,7 @@
   <section show.bind="(editMode || sources) | any">
     <h3>
       ${sources | pluralCase:["Source","Sources"]}
-      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+      <button class="btn-link" show.bind="editMode" data-toggle="modal" data-target="#source-select"><i class="fa fa-plus"></i></button>
     </h3>
     <ranked-detail type-slug="source" items.bind="sources" ranks.bind="ranks"></ranked-detail>
   </section>
@@ -69,7 +69,7 @@
   <section show.bind="(editMode || playlists) | any">
     <h3>
       ${playlists | pluralCase:["Playlist","Playlists"]}
-      <button class="btn-link" show.bind="editMode"><i class="fa fa-plus"></i></button>
+      <button class="btn-link" show.bind="editMode" data-toggle="modal" data-target="#playlist-select"><i class="fa fa-plus"></i></button>
     </h3>
     <ranked-detail type-slug="playlist" items.bind="playlists" ranks.bind="ranks"></ranked-detail>
   </section>
@@ -110,5 +110,10 @@
           repeat.for="score of scores"></div>
     </div>
   </section>
+
+  <smart-select eid="artist-select" title="Add Artist" path="artists/titles" ></smart-select>
+  <smart-select eid="genre-select" title="Add Genre" path="genres/titles" ></smart-select>
+  <smart-select eid="source-select" title="Add Source" path="sources/titles" ></smart-select>
+  <smart-select eid="playlist-select" title="Add Playlist" path="playlists/titles" ></smart-select>
 
 </template>
