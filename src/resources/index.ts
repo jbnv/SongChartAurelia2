@@ -24,6 +24,7 @@ export function configure(aurelia) {
     './elements/artist-table',
     './elements/messages',
     './elements/rank-bar',
+    './elements/smart-select',
     './elements/value-bar'
   ]);
 }
