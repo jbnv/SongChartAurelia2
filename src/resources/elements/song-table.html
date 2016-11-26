@@ -77,7 +77,14 @@
     		</th>
 
         <th style="text-align:center">
-          <i class="fa fa-caret-down"></i>
+          <div class="btn-group">
+            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a click.delegate="toggleEdit()"><i class="fa fa-fw fa-pencil"></i> Edit<a></li>
+            </ul>
+          </div>
     		</th>
 
     	</tr>
@@ -163,6 +170,8 @@
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
           <span>${song.peak | decimal:3}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.peakFn(-1)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
         <td show.bind="!columns.peakScore.hidden && options.showStatBars">
@@ -171,6 +180,8 @@
 
         <td show.bind="!columns.ascent.hidden" style="text-align:right">
           <span>${song["ascent-weeks"] | decimal:2}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.ascentFn(1.25)(song.key)"><i class="fa fa-fw fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.ascentFn(0.8)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
         <td show.bind="!columns.ascent.hidden && options.showStatBars">
@@ -179,6 +190,8 @@
 
         <td show.bind="!columns.descent.hidden" style="text-align:right">
           <span>${song["descent-weeks"] | decimal:2}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.descentFn(1.25)(song.key)"><i class="fa fa-fw fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.descentFn(0.8)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
         <td show.bind="!descent.descent.hidden && options.showStatBars">
@@ -195,12 +208,6 @@
               <li><a><i class="fa fa-fw fa-chevron-down"></i> Swap down</a></li>
               <li><a click.delegate="scoring.swapDurations(song.key)"><i class="fa fa-fw fa-exchange"></i> Swap ascent/descent</a></li>
               <li><a click.delegate="scoring.normalizeDurations(song.key)"><i class="fa fa-fw fa-exchange"></i> Normalize ascent/descent</a></li>
-              <li><a click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Peak up</a></li>
-              <li><a click.delegate="scoring.peakFn(-1)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Peak down</a></li>
-              <li><a click.delegate="scoring.ascentFn(1.5)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Ascent up</a></li>
-              <li><a click.delegate="scoring.ascentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Ascent down</a></li>
-              <li><a click.delegate="scoring.descentFn(1.5)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Descent up</a></li>
-              <li><a click.delegate="scoring.descentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Descent down</a></li>
               <li><a click.delegate="scoring.clear(song.key)"><i class="fa fa-fw"></i> Clear</a></li>
               <li><a click.delegate="scoring.zero(song.key)"><i class="fa fa-fw"></i> Zero</a></li>
             </ul>

@@ -86,4 +86,10 @@ export class SongTableCustomElement extends Collection {
 
   scoring = Scoring;
 
+  showEditControls = false;
+
+  toggleEdit() {
+    this.showEditControls = !this.showEditControls;
+  }
+
 }
