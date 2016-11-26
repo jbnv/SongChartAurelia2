@@ -1,18 +1,18 @@
 import 'firebase';
 import {Configuration} from './firebase/index';
 
-function _score():any {
+function _score(...parameters: any[]):number {
 
-  var peak = arguments[0] || 0,
-      ascentWeeks = arguments[1] || 0,
-      descentWeeks = arguments[2] || 0;
+  var peak = parameters[0] || 0,
+      ascentWeeks = parameters[1] || 0,
+      descentWeeks = parameters[2] || 0;
 
   if (!peak) return null;
 
-  if (typeof arguments[0] == "object") {
-    peak = arguments[0].peak || 0;
-    ascentWeeks = arguments[0]["ascent-weeks"] || 0;
-    descentWeeks = arguments[0]["descent-weeks"] || 0;
+  if (typeof parameters[0] == "object") {
+    peak = parameters[0].peak || 0;
+    ascentWeeks = parameters[0]["ascent-weeks"] || 0;
+    descentWeeks = parameters[0]["descent-weeks"] || 0;
   }
 
   return (2/3) * peak * (ascentWeeks+descentWeeks);
