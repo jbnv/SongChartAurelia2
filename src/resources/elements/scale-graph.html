@@ -4,14 +4,14 @@
       <div
         title.bind="item.tooltip || item.title+': '+item.value"
         class="vertical-bar ${item.leader ? 'leader' : null} ${item.lagger ? 'lagger' : null}"
-        style="width: ${100/items.length}%; height: ${100*item.scale}%"
+        css="width: ${100/items.length}%; height: ${100*item.scale}%"
         repeat.for="item of items">
       </div>
   </div>
 
   <div style="width:100%">
     <div class="vertical-bar-title"
-        style="width: ${100/items.length}%;" repeat.for="item of items">
+        css="width: ${100/items.length}%;" repeat.for="item of items">
         <a href="#/${item.route}" if.bind="item.route">${item.title}</a>
         <span if.bind="!item.route">${item.title}</span>
     </div>
