@@ -57,7 +57,7 @@ export class Year extends Data {
         this.countScales.push({
           ordinal: parseInt(ordinal),
           title: this.monthNames[ordinal],
-          value: month.count,
+          value: (month || {}).count || 0,
           route: "month/"+monthSlug
         });
         this.aaScales.push({

@@ -1,4 +1,5 @@
 import {Data} from '../resources/data';
+import * as gregoria from 'gregoria';
 import * as numeral from 'numeral';
 import * as Scoring from '../resources/scoring';
 
@@ -23,9 +24,12 @@ export class Song extends Data {
   descentWeeks: number;
   rank: number;
   status: string;
+
   debutEra = {};
-  decade: any;
-  year: any;
+  decadeRank: number;
+  decadeCount: number;
+  yearRank:number;
+  yearCount:number;
 
   scores = [];
 
@@ -51,9 +55,15 @@ export class Song extends Data {
     this.sources = inbound.sources || {};
     this.tags = inbound.tags || {};
 
-    console.log("[45]",this.ranks);
-
-    this.debutEra = inbound.debutEra || {};
+    this.debutEra = new gregoria(inbound.debut) || {decade:null,year:null};
+    if (this.debutEra.decade) {
+      this.decadeRank = this.ranks['decade:'+this.debutEra.decade+'s'].rank;
+      this.decadeCount = this.ranks['decade:'+this.debutEra.decade+'s'].total;
+    }
+    if (this.debutEra.year) {
+      this.yearRank = this.ranks['year:'+this.debutEra.year+'s'].rank;
+      this.yearCount = this.ranks['year:'+this.debutEra.year+'s'].total;
+    }
 
     this.scores = [];
     for (var i = 1; i < this.ascentWeeks + this.descentWeeks; i++) {

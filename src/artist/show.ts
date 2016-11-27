@@ -34,7 +34,7 @@ export class Artist extends Data {
   massage(inbound) {
     this.rank = inbound.__rank;
     this.type = inbound.type.slug;
-    this.typeTitle = inbound.type.title || "NOT SET";
+    this.typeTitle = (inbound.type || {}).title || "NOT SET";
     this.status
       = inbound.complete ? "complete"
       : inbound.active ? "active" : "incomplete";
