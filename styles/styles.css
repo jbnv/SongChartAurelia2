@@ -195,6 +195,17 @@ div.au-stagger {
   background-color: #333333;
 }
 
+.vertical-bar-peak {
+  display: inline-block;
+  position: relative;
+  background-color: #999948; /* yellow */
+  vertical-align: baseline;
+}
+
+.vertical-bar-peak:hover {
+  background-color: #333333;
+}
+
 .leader {
   background-color: #489948; /* green */
 }
@@ -260,7 +271,7 @@ div.au-stagger {
 
 .fa-ascent:before { content:"\f176" } /* long-arrow-up */
 
-.fa-descent { 
+.fa-descent {
   display: inline-block;
   -webkit-transform: rotate(135deg);
   transform: rotate(135deg);

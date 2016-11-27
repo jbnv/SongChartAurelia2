@@ -102,8 +102,9 @@
 
   <section if.bind="score > 0">
     <div class="graph">
-      <div class="vertical-bar"
-          css="width: ${100/scores.length}%; height: ${100*score}%;"
+      <div class.bind="score.class"
+          title.bind="score.title"
+          css="width: ${100/scores.length}%; height: ${100*score.value}%;"
           repeat.for="score of scores"></div>
     </div>
   </section>
