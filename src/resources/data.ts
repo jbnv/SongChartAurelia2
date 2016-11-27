@@ -17,7 +17,6 @@ export class Data extends ReactiveCollection {
   subscription: any;
 
   _massage(inbound) {
-    console.log("Data._massage [18]"); //TEMP
     this.title = inbound.title || this.title;
     this.title = inbound.title;
 
@@ -32,11 +31,9 @@ export class Data extends ReactiveCollection {
   }
 
   massage(inbound) {
-    console.log("Data.massage [33] (does nothing)"); //TEMP
   }
 
   refresh() {
-    console.log("Data.refresh [35]"); //TEMP
     let fetchRoute = this.fetchRoute;
     if (this.fetchRouteFn) { fetchRoute = this.fetchRouteFn(this.parameters); }
     this.navModel.setTitle(this.title);
