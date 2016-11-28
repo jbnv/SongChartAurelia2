@@ -30,6 +30,16 @@ function _bend(c) {
   }
 }
 
+function _normalize(song:any) {
+  if (!song["ascent-weeks"]) song["ascent-weeks"] = 0.0;
+  if (!song["descent-weeks"]) song["descent-weeks"] = 0.0;
+  let weeks = song["ascent-weeks"] + song["descent-weeks"];
+  let coefficient = song.peak * (1-song.peak);
+  song["ascent-weeks"] = weeks * coefficient;
+  song["descent-weeks"] = weeks * (1-coefficient);
+  song.score = _score(song);
+  return song;
+}
 function _queryRaw(songSlug) {
   return firebase.database().ref("songs/raw").child(songSlug);
 }
@@ -107,16 +117,7 @@ export const swapDurations = _transform(function(song) {
   return song;
 });
 
-export const normalizeDurations = _transform(function(song) {
-  if (!song["ascent-weeks"]) song["ascent-weeks"] = 1.0;
-  if (!song["descent-weeks"]) song["descent-weeks"] = 1.0;
-  let weeks = song["ascent-weeks"] + song["descent-weeks"];
-  let coefficient = song.peak * (1-song.peak);
-  song["ascent-weeks"] = weeks * coefficient;
-  song["descent-weeks"] = weeks * (1-coefficient);
-  song.score = _score(song);
-  return song;
-});
+export const normalizeDurations = _transform(_normalize);
 
 export function clear(slug) {
   _write(slug,{"peak": null, "ascent-weeks":null, "descent-weeks":null});
