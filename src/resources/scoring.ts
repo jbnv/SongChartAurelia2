@@ -40,6 +40,12 @@ function _normalize(song:any) {
   song.score = _score(song);
   return song;
 }
+
+function _adjustDescent(song:any,newScore:number) {
+  song["descent-weeks"] = 1.5 * newScore / song.peak - song["ascent-weeks"];
+  return song;
+}
+
 function _queryRaw(songSlug) {
   return firebase.database().ref("songs/raw").child(songSlug);
 }
