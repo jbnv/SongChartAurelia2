@@ -89,9 +89,9 @@ function _transform(fn) {
 
 export function peakFn(coefficient) {
   return _transform(function(song) {
+    let originalScore = _score(song);
     song.peak = _bend(coefficient)(song.peak || "0.5");
-    song.score = _score(song);
-    return song;
+    return _normalize(_adjustDescent(song,originalScore));
   });
 };
 
