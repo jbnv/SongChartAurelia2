@@ -1,4 +1,6 @@
 import {Data} from '../resources/data';
+import * as gregoria from 'gregoria';
+import * as moment from 'moment';
 import * as numeral from 'numeral';
 import * as Scoring from '../resources/scoring';
 
@@ -23,9 +25,12 @@ export class Song extends Data {
   descentWeeks: number;
   rank: number;
   status: string;
+
   debutEra = {};
-  decade: any;
-  year: any;
+  decadeRank: number;
+  decadeCount: number;
+  yearRank:number;
+  yearCount:number;
 
   scores = [];
 
@@ -51,15 +56,34 @@ export class Song extends Data {
     this.sources = inbound.sources || {};
     this.tags = inbound.tags || {};
 
-    console.log("[45]",this.ranks);
-
-    this.debutEra = inbound.debutEra || {};
+    this.debutEra = new gregoria(inbound.debut) || {decade:null,year:null};
+    if (this.debutEra.decade) {
+      let rank = this.ranks['decade:'+this.debutEra.decade+'s'] || {};
+      this.decadeRank = rank.rank;
+      this.decadeCount = rank.total;
+    }
+    if (this.debutEra.year) {
+      let rank = this.ranks['year:'+this.debutEra.year] || {};
+      this.yearRank = rank.rank;
+      this.yearCount = rank.total;
+    }
 
     this.scores = [];
-    for (var i = 1; i < this.ascentWeeks + this.descentWeeks; i++) {
-      let denominator = i < this.ascentWeeks ? this.ascentWeeks : this.descentWeeks;
-      this.scores.push(
-        this.peak * (1-Math.pow((i-this.ascentWeeks)/denominator,2))
+    let momentIterator = moment(inbound.debut);
+    for (var d = 1; d < (this.ascentWeeks+this.descentWeeks)*7; d++) {
+      let w = d / 7.0;
+      let denominator = w < this.ascentWeeks ? this.ascentWeeks : this.descentWeeks;
+      let value = this.peak * (1-Math.pow((w-this.ascentWeeks)/denominator,2));
+      let header = `${d}`;
+      if (momentIterator.isValid()) {
+        momentIterator.add(1,'day');
+        header = momentIterator.format("YYYY-MM-DD");
+      }
+      this.scores.push({
+          class: Math.abs(w-this.ascentWeeks)*7 < 1 ? "vertical-bar-peak" : "vertical-bar",
+          title: `${header}: ${numeral(value).format("0.000")}`,
+          value: value,
+        }
       );
     }
 

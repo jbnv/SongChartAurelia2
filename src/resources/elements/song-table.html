@@ -43,20 +43,48 @@
 
         <th show.bind="!columns.motion.hidden"></th><!-- debut/ascending/descending -->
 
-    		<th show.bind="!columns.peakScore.hidden"  class="${sortColumn === 'peak' ? 'active' : ''}" colspan=2>
-    			<a click.trigger="sortByPeak()">Peak</A> <i class="fa fa-peak"></i>
+    		<th
+          show.bind="!columns.peakScore.hidden"
+          class="${sortColumn === 'peak' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+    			<a click.trigger="sortByPeak()">
+            <span show.bind="options.showStatBars">Peak</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-peak"></i></span>
+          </a>
     		</th>
 
-        <th show.bind="!columns.ascent.hidden" class="${sortColumn === 'ascent' ? 'active' : ''}" colspan=2>
-          <a click.trigger="sortByAscent()">Ascent <i class="fa fa-ascent"></i></a>
+        <th
+          show.bind="!columns.ascent.hidden"
+          class="${sortColumn === 'ascent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByAscent()">
+            <span show.bind="options.showStatBars">Ascent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-ascent"></i></span>
+          </a>
     		</th>
 
-        <th show.bind="!columns.descent.hidden" class="${sortColumn === 'descent' ? 'active' : ''}" colspan=2>
-          <a click.trigger="sortByDescent()">Descent <i class="fa fa-descent"></i></a>
+        <th
+          show.bind="!columns.descent.hidden"
+          class="${sortColumn === 'descent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByDescent()">
+            <span show.bind="options.showStatBars">Descent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-descent"></i></span>
+          </a>
     		</th>
 
         <th style="text-align:center">
-          <i class="fa fa-caret-down"></i>
+          <div class="btn-group">
+            <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right">
+              <li><a click.delegate="toggleEdit()"><i class="fa fa-fw fa-pencil"></i> Edit<a></li>
+            </ul>
+          </div>
     		</th>
 
     	</tr>
@@ -79,9 +107,11 @@
         </td>
 
         <td show.bind="!columns.artist.hidden">
-          <span repeat.for="artist of titleArtists(song.artists)">
-            <a href="#/artist/${artist.slug}">${artist.title}</a>
-            <br>
+          <span repeat.for="artist of song.artists | objectValues">
+            <span if.bind="artist.roleSlug === true">
+              <a href="#/artist/${artist.__key}">${artist.title}</a>
+              <br>
+            </span>
           </span>
         </td>
 
@@ -132,6 +162,7 @@
         </td>
 
         <td show.bind="!columns.motion.hidden" style="text-align:right">
+          <i class="fa fa-fw fa-hourglass-half" show.bind="song.isPartial"></i>
           <i class="fa fa-fw fa-star" show.bind="song.isDebut"></i>
           <i class="fa fa-fw fa-long-arrow-up" show.bind="song.isAscending"></i>
           <i class="fa fa-fw fa-long-arrow-down" show.bind="song.isDescending"></i>
@@ -139,25 +170,31 @@
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
           <span>${song.peak | decimal:3}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.peakFn(-1)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
-        <td show.bind="!columns.peakScore.hidden">
+        <td show.bind="!columns.peakScore.hidden && options.showStatBars">
           <value-bar value.bind="song.peak" max.bind="1" width="3em"></value-bar>
         </td>
 
         <td show.bind="!columns.ascent.hidden" style="text-align:right">
           <span>${song["ascent-weeks"] | decimal:2}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.ascentFn(1.25)(song.key)"><i class="fa fa-fw fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.ascentFn(0.8)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
-        <td show.bind="!columns.ascent.hidden">
+        <td show.bind="!columns.ascent.hidden && options.showStatBars">
           <value-bar value.bind="song['ascent-weeks']" max.bind="maxes['ascent-weeks']" width="3em"></value-bar>
         </td>
 
         <td show.bind="!columns.descent.hidden" style="text-align:right">
           <span>${song["descent-weeks"] | decimal:2}</span>
+          <a show.bind="showEditControls" click.delegate="scoring.descentFn(1.25)(song.key)"><i class="fa fa-fw fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.descentFn(0.8)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 
-        <td show.bind="!descent.descent.hidden">
+        <td show.bind="!descent.descent.hidden && options.showStatBars">
           <value-bar value.bind="song['descent-weeks']" max.bind="maxes['descent-weeks']" width="3em"></value-bar>
         </td>
 
@@ -171,12 +208,6 @@
               <li><a><i class="fa fa-fw fa-chevron-down"></i> Swap down</a></li>
               <li><a click.delegate="scoring.swapDurations(song.key)"><i class="fa fa-fw fa-exchange"></i> Swap ascent/descent</a></li>
               <li><a click.delegate="scoring.normalizeDurations(song.key)"><i class="fa fa-fw fa-exchange"></i> Normalize ascent/descent</a></li>
-              <li><a click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Peak up</a></li>
-              <li><a click.delegate="scoring.peakFn(-1)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Peak down</a></li>
-              <li><a click.delegate="scoring.ascentFn(1.5)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Ascent up</a></li>
-              <li><a click.delegate="scoring.ascentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Ascent down</a></li>
-              <li><a click.delegate="scoring.descentFn(1.5)(song.key)"><i class="fa fa-fw fa-chevron-up"></i> Descent up</a></li>
-              <li><a click.delegate="scoring.descentFn(2/3)(song.key)"><i class="fa fa-fw fa-chevron-down"></i> Descent down</a></li>
               <li><a click.delegate="scoring.clear(song.key)"><i class="fa fa-fw"></i> Clear</a></li>
               <li><a click.delegate="scoring.zero(song.key)"><i class="fa fa-fw"></i> Zero</a></li>
             </ul>

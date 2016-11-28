@@ -6,10 +6,27 @@
   <require from="./resources/elements/year-saa-graph"></require>
 
   <div class="container">
+
     <div class="row">
       <div class="col-xs-6">
 
-        <br />
+        <h2><a href="#/decades">Decades</a></h2>
+
+        <compose view-model="./resources/elements/decade-count-graph" model.bind="decades"></compose>
+        <compose view-model="./resources/elements/decade-saa-graph" model.bind="decades"></compose>
+
+      </div>
+      <div class="col-xs-6">
+
+        <h2><a href="#/years">Years</a></h2>
+
+        <compose view-model="./resources/elements/year-count-graph" model.bind="years"></compose>
+        <compose view-model="./resources/elements/year-saa-graph" model.bind="years"></compose>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6">
 
         <h2>Lists</h2>
 
@@ -37,38 +54,6 @@
           </a>
         </div>
 
-        <div class="list-group">
-          <a class="list-group-item" href="#/decades">
-            <i class="fa-fw fa fa-calendar"></i> Decades
-          </a>
-          <a class="list-group-item" href="#/years">
-            <i class="fa-fw fa fa-calendar"></i> Years
-          </a>
-        </div>
-
-        <h2><a href="#/decades">Decades</a></h2>
-
-        <compose view-model="./resources/elements/decade-count-graph" model.bind="decades"></compose>
-        <compose view-model="./resources/elements/decade-saa-graph" model.bind="decades"></compose>
-
-        <h2><a href="#/years">Years</a></h2>
-
-        <compose view-model="./resources/elements/year-count-graph" model.bind="years"></compose>
-        <compose view-model="./resources/elements/year-saa-graph" model.bind="years"></compose>
-
-      </div>
-      <div class="col-xs-6">
-
-        <br />
-
-        <h2>Recents</h2>
-
-        <div class="list-group">
-          <a class="list-group-item" href="#/${item.route}" repeat.for="item of history.recents.slice(0,10)">
-            <i class="fa-fw fa fa-${item.type || 'circle'}"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
-          </a>
-        </div>
-
         <h2>External Links</h2>
 
         <div class="list-group">
@@ -76,6 +61,17 @@
           <a class="list-group-item" href="https://github.com/jbnv/SongChartAurelia2"><i class="fa-fw fa fa-external-link"></i> UI Repository (v2)</a>
           <a class="list-group-item" href="https://github.com/jbnv/SongChartData"><i class="fa-fw fa fa-external-link"></i> Data Repository</a>
           <a class="list-group-item" href="https://github.com/jbnv/SongChartDataFirebase"><i class="fa-fw fa fa-external-link"></i> Firebase Compiler</a>
+        </div>
+
+      </div>
+      <div class="col-xs-6">
+
+        <h2>Recents</h2>
+
+        <div class="list-group">
+          <a class="list-group-item" href="#/${item.route}" repeat.for="item of history.recents.slice(0,10)">
+            <i class="fa-fw fa fa-${item.type || 'circle'}"></i> ${item.title} <span class="badge">${item.timestamp | fromNow}</span>
+          </a>
         </div>
 
       </div>

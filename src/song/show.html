@@ -16,27 +16,24 @@
   <section>
     <h3>Debut</h3>
     <div class="container">
-      <div class="row" show.bind="decade">
+      <div class="row" show.bind="debutEra.decade">
         <div class="col-xs-3">${debutEra.title}</div>
         <div class="col-xs-1 text-right">
           <a href="#/decade/${debutEra.decade}s">${debutEra.decade}s</a>
         </div>
-        <div class="col-xs-1 text-right">${decade.rank}</div>
+        <div class="col-xs-1 text-right">${decadeRank}</div>
         <div class="col-xs-3">
-          <rank-bar
-            rank.bind="ranks['decade:'+debutEra.decade+'s'].rank"
-            count.bind="ranks['decade:'+debutEra.decade+'s'].total"
-          ></rank-bar>
+          <rank-bar rank.bind="decadeRank" count.bind="decadeCount" ></rank-bar>
         </div>
       </div>
-      <div class="row" show.bind="year">
+      <div class="row" show.bind="debutEra.year">
         <div class="col-xs-3">&nbsp;</div>
         <div class="col-xs-1 text-right">
           <a href="#/year/${debutEra.year}">${debutEra.year}</a>
         </div>
-        <div class="col-xs-1 text-right">${year.rank}</div>
+        <div class="col-xs-1 text-right">${yearRank}</div>
         <div class="col-xs-3">
-          <rank-bar rank.bind="year.rank" count.bind="year.count"></rank-bar>
+          <rank-bar rank.bind="yearRank" count.bind="yearCount"></rank-bar>
         </div>
       </div>
     </div>
@@ -81,11 +78,11 @@
          ${peak | decimal:3}
        </span>
        <span class="small" show.bind="ascentWeeks > 0">
-         <i class="fa fa-chevron-up"></i>
+         <i class="fa fa-ascent"></i>
          ${ascentWeeks | decimal:2}
        </span>
        <span class="small" show.bind="descentWeeks > 0">
-         <i class="fa fa-chevron-down"></i>
+         <i class="fa fa-descent"></i>
          ${descentWeeks | decimal:2}
        </span>
     </h3>
@@ -105,8 +102,9 @@
 
   <section if.bind="score > 0">
     <div class="graph">
-      <div class="vertical-bar"
-          css="width: ${100/scores.length}%; height: ${100*score}%;"
+      <div class.bind="score.class"
+          title.bind="score.title"
+          css="width: ${100/scores.length}%; height: ${100*score.value}%;"
           repeat.for="score of scores"></div>
     </div>
   </section>
