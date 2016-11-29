@@ -77,25 +77,25 @@
       Scores
        <span class="small" show.bind="peak > 0">
          ${peak | decimal:3}
+         <a show.bind="editMode && peak !== 1" click.delegate="scoring.peakFn(1)(slug)"><i class="fa fa-chevron-up"></i></a>
+         <a show.bind="editMode && peak !== 1" click.delegate="scoring.peakFn(-1)(slug)"><i class="fa fa-chevron-down"></i></a>
        </span>
        <span class="small" show.bind="ascentWeeks > 0">
          <i class="fa fa-ascent"></i>
          ${ascentWeeks | decimal:2}
+         <a show.bind="editMode" click.delegate="scoring.ascentFn(1.25)(song.key)"><i class="fa fa-chevron-up"></i></a>
+         <a show.bind="editMode" click.delegate="scoring.ascentFn(0.8)(song.key)"><i class="fa fa-chevron-down"></i></a>
        </span>
        <span class="small" show.bind="descentWeeks > 0">
          <i class="fa fa-descent"></i>
          ${descentWeeks | decimal:2}
+         <a show.bind="editMode" click.delegate="scoring.descentFn(1.25)(song.key)"><i class="fa fa-chevron-up"></i></a>
+         <a show.bind="editMode" click.delegate="scoring.descentFn(0.8)(song.key)"><i class="fa fa-chevron-down"></i></a>
        </span>
     </h3>
     <ul class="nav nav-pills" show.bind="editMode">
       <li role="presentation"><a click.delegate="scoring.swapDurations(slug)"><i class="fa fa-exchange"></i> Swap ascent/descent</a></li>
       <li role="presentation"><a click.delegate="scoring.normalizeDurations(slug)"><i class="fa fa-exchange"></i> Normalize ascent/descent</a></li>
-      <li role="presentation"><a click.delegate="scoring.peakFn(1)(slug)"><i class="fa fa-chevron-up"></i> Peak up</a></li>
-      <li role="presentation"><a click.delegate="scoring.peakFn(-1)(slug)"><i class="fa fa-chevron-down"></i> Peak down</a></li>
-      <li role="presentation"><a click.delegate="scoring.ascentFn(1.5)(slug)"><i class="fa fa-chevron-up"></i> Ascent up</a></li>
-      <li role="presentation"><a click.delegate="scoring.ascentFn(2/3)(slug)"><i class="fa fa-chevron-down"></i> Ascent down</a></li>
-      <li role="presentation"><a click.delegate="scoring.descentFn(1.5)(slug)"><i class="fa fa-chevron-up"></i> Descent up</a></li>
-      <li role="presentation"><a click.delegate="scoring.descentFn(2/3)(slug)"><i class="fa fa-chevron-down"></i> Descent down</a></li>
       <li role="presentation"><a click.delegate="scoring.clear(slug)">Clear</a></li>
       <li role="presentation"><a click.delegate="scoring.zero(slug)">Zero</a></li>
     </ul>
