@@ -170,7 +170,7 @@
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
           <span>${song.peak | decimal:3}</span>
-          <a show.bind="showEditControls" click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-chevron-up"></i></a>
+          <a show.bind="showEditControls" click.delegate="scoring.peakFn(1)(song.key)"><i class="fa fa-fw fa-chevron-up"></i></a>
           <a show.bind="showEditControls" click.delegate="scoring.peakFn(-1)(song.key)"><i class="fa fa-fw fa-chevron-down"></i></a>
         </td>
 

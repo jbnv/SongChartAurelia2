@@ -44,9 +44,10 @@ export function sortByAAA(a,b) {
 
 function _compareDateSlugs(slugA,slugB) {
   let a = new gregoria(slugA), b = new gregoria(slugB);
-  if (a.decade != b.decade) return a.decade - b.decade;
-  if (a.year != b.year) return a.year - b.year;
-  return a.month - b.month;
+  if (a.decade != b.decade) return parseFloat(a.decade || 0) - parseFloat(b.decade || 0);
+  if (a.year != b.year) return parseFloat(a.year || 0) - parseFloat(b.year || 0);
+  if (a.month != b.month) return parseFloat(a.month || 0) - parseFloat(b.month || 0);
+  return parseFloat(a.day || 0) - parseFloat(b.day || 0);
 }
 
 export function sortByDebutDate(a,b) {

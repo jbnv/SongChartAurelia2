@@ -37,7 +37,6 @@ export class YearScales {
   }
 
   activate(songs) {
-    console.log("YearScales.activate [40]",songs);
     if (!songs) return;
 
     let decades = {};
