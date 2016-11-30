@@ -13,7 +13,7 @@ export class ArtistTableCustomElement extends Collection {
 
   _defaultCount = 100;
 
-  maxFields = ['songCount','score'];
+  maxFields = ['songCount','score','average-peak','average-ascent-weeks','average-descent-weeks'];
 
   columns = new Columns({
     'rank': 'Rank',

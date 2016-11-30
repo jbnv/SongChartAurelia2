@@ -36,6 +36,39 @@
           <a click.trigger="sortBySAA()">SAA</a>
         </th>
 
+        <th
+          show.bind="!columns.peakScore.hidden"
+          class="${sortColumn === 'peak' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+    			<a click.trigger="sortByPeak()">
+            <span show.bind="options.showStatBars">Peak</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-peak"></i></span>
+          </a>
+    		</th>
+
+        <th
+          show.bind="!columns.ascent.hidden"
+          class="${sortColumn === 'ascent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByAscent()">
+            <span show.bind="options.showStatBars">Ascent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-ascent"></i></span>
+          </a>
+    		</th>
+
+        <th
+          show.bind="!columns.descent.hidden"
+          class="${sortColumn === 'descent' ? 'active' : ''}"
+          colspan.bind="1+(options.showStatBars?1:0)"
+        >
+          <a click.trigger="sortByDescent()">
+            <span show.bind="options.showStatBars">Descent</span>
+            <span show.bind="!options.showStatBars"><i class="fa fa-descent"></i></span>
+          </a>
+    		</th>
+
     	</tr>
 
     </thead>
@@ -79,6 +112,30 @@
 
         <td show.bind="!columns.songAdjustedAverage.hidden">
           <value-bar value.bind="artist.score" max.bind="maxes.score"></value-bar>
+        </td>
+
+        <td show.bind="!columns.peakScore.hidden" style="text-align:right">
+          <span>${artist["average-peak"] | decimal:3}</span>
+        </td>
+
+        <td show.bind="!columns.peakScore.hidden && options.showStatBars">
+          <value-bar value.bind="artist['average-peak']" max.bind="1" width="3em"></value-bar>
+        </td>
+
+        <td show.bind="!columns.ascent.hidden" style="text-align:right">
+          <span>${artist["average-ascent-weeks"] | decimal:2}</span>
+        </td>
+
+        <td show.bind="!columns.ascent.hidden && options.showStatBars">
+          <value-bar value.bind="artist['average-ascent-weeks']" max.bind="maxes['average-ascent-weeks']" width="3em"></value-bar>
+        </td>
+
+        <td show.bind="!columns.descent.hidden" style="text-align:right">
+          <span>${artist["average-descent-weeks"] | decimal:2}</span>
+        </td>
+
+        <td show.bind="!descent.descent.hidden && options.showStatBars">
+          <value-bar value.bind="artist['average-descent-weeks']" max.bind="maxes['average-descent-weeks']" width="3em"></value-bar>
         </td>
 
       </tr>
