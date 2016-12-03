@@ -99,7 +99,7 @@
         </td>
 
         <td show.bind="!columns.songCount.hidden" style="text-align:right">
-          <span if.bind="artist.songCount > 0">${artist.songCount || 0}</span>
+          <a if.bind="artist.songCount > 0" href="#/artist/${artist.key}/songs">${artist.songCount || 0}</a>
         </td>
 
         <td show.bind="!columns.songCount.hidden">
