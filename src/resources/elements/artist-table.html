@@ -32,7 +32,7 @@
           <a click.trigger="sortBySongCount()">Songs</a>
         </th>
 
-        <th show.bind="!columns.songAdjustedAverage.hidden" class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" colspan=2>
+        <th show.bind="!columns.songAdjustedAverage.hidden" class="${sortColumn === 'songAdjustedAverage' ? 'active' : ''}" colspan=3>
           <a click.trigger="sortBySAA()">SAA</a>
         </th>
 
@@ -112,6 +112,12 @@
 
         <td show.bind="!columns.songAdjustedAverage.hidden">
           <value-bar value.bind="artist.score" max.bind="maxes.score"></value-bar>
+        </td>
+
+        <td show.bind="!columns.songAdjustedAverage.hidden">
+          <span if.bind="artist.trend == 'leader'">🔵</span>
+          <span if.bind="artist.trend == 'lagger'">🔴</span>
+          <span if.bind="artist.trend == 'par'">⚫️</span>
         </td>
 
         <td show.bind="!columns.peakScore.hidden" style="text-align:right">
