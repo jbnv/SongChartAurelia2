@@ -63,6 +63,18 @@
             <li repeat.for="item of history.recentsByType.year.slice(0,5)">
               <a href="#/${item.route}">${item.title}</a>
             </li>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li role="presentation" class="dropdown-header">Recent Months</li>
+          <li repeat.for="item of history.recentsByType.month.slice(0,5)">
+            <a href="#/${item.route}">${item.title}</a>
+          </li>
+        </li>
+        <li role="separator" class="divider"></li>
+        <li role="presentation" class="dropdown-header">Recent Days</li>
+        <li repeat.for="item of history.recentsByType.day.slice(0,5)">
+          <a href="#/${item.route}">${item.title}</a>
+        </li>
           </ul>
         </li>
 
